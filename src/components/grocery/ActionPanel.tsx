@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import type { PurchaseHistoryItem } from '@/lib/types';
 import { getRepurchaseSuggestions, getHealthierAlternatives, getExpiryReminders } from '@/lib/actions';
-import { Lightbulb, Recycle, Wheat, AlertTriangle, Loader2 } from 'lucide-react';
+import { Lightbulb, Recycle, Wheat, AlertTriangle, Loader2, Sparkles } from 'lucide-react';
 
 interface ActionPanelProps {
   groceryList: string[];
@@ -13,76 +14,136 @@ interface ActionPanelProps {
   isLoaded: boolean;
 }
 
-type ActionType = 're-purchase' | 'healthier' | 'expiry';
+type ActionType = 're-purchase' | 'healthier' | 'expiry' | null;
 
 export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPanelProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [activeAction, setActiveAction] = useState<ActionType>(null);
   const [title, setTitle] = useState('AI Suggestions');
-  const [icon, setIcon] = useState<React.ReactNode>(<Lightbulb className="h-6 w-6 text-primary" />);
+  const [icon, setIcon] = useState<React.ReactNode>(<Lightbulb className="h-5 w-5 text-primary" />);
 
   const handleAction = async (actionType: ActionType) => {
+    if (!actionType) return;
+    
     setIsLoading(true);
     setSuggestions([]);
+    setActiveAction(actionType);
     let results: string[] = [];
     
-    if (actionType === 're-purchase') {
-      setTitle('Re-Purchase Suggestions');
-      setIcon(<Recycle className="h-6 w-6 text-primary" />);
-      results = await getRepurchaseSuggestions(purchaseHistory, groceryList);
-    } else if (actionType === 'healthier') {
-      setTitle('Healthier Alternatives');
-      setIcon(<Wheat className="h-6 w-6 text-accent-foreground" />);
-      results = await getHealthierAlternatives(groceryList);
-    } else if (actionType === 'expiry') {
-      setTitle('Expiry Reminders');
-      setIcon(<AlertTriangle className="h-6 w-6 text-destructive" />);
-      results = await getExpiryReminders(purchaseHistory);
+    try {
+      if (actionType === 're-purchase') {
+        setTitle('Re-Purchase Suggestions');
+        setIcon(<Recycle className="h-5 w-5 text-primary" />);
+        results = await getRepurchaseSuggestions(purchaseHistory, groceryList);
+      } else if (actionType === 'healthier') {
+        setTitle('Healthier Alternatives');
+        setIcon(<Wheat className="h-5 w-5 text-accent-foreground" />);
+        results = await getHealthierAlternatives(groceryList);
+      } else if (actionType === 'expiry') {
+        setTitle('Expiry Reminders');
+        setIcon(<AlertTriangle className="h-5 w-5 text-destructive" />);
+        results = await getExpiryReminders(purchaseHistory);
+      }
+      
+      setSuggestions(results);
+    } catch (error) {
+      console.error('Error fetching suggestions:', error);
+      setSuggestions(['An error occurred while fetching suggestions. Please try again.']);
+    } finally {
+      setIsLoading(false);
     }
-    
-    setSuggestions(results);
-    setIsLoading(false);
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <Card>
-        <CardHeader>
-          <CardTitle className="font-headline">AI Assistant</CardTitle>
-          <CardDescription>Get smart suggestions for your groceries.</CardDescription>
+        <CardHeader className="pb-4">
+          <div className="flex items-center gap-2 mb-1">
+            <Sparkles className="h-5 w-5 text-primary" />
+            <CardTitle className="font-headline text-lg">AI Assistant</CardTitle>
+          </div>
+          <CardDescription className="text-sm">
+            Get smart suggestions for your groceries based on your purchase history and preferences.
+          </CardDescription>
         </CardHeader>
-        <CardContent className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-          <Button onClick={() => handleAction('re-purchase')} disabled={!isLoaded || isLoading}>
-            <Recycle className="mr-2 h-4 w-4" /> Suggest Re-Purchase
-          </Button>
-          <Button onClick={() => handleAction('healthier')} disabled={!isLoaded || isLoading} variant="outline">
-            <Wheat className="mr-2 h-4 w-4" /> Healthier Options
-          </Button>
-          <Button onClick={() => handleAction('expiry')} disabled={!isLoaded || isLoading} variant="destructive">
-            <AlertTriangle className="mr-2 h-4 w-4" /> Check Expiry
-          </Button>
+        <CardContent className="pt-0">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <Button 
+              onClick={() => handleAction('re-purchase')} 
+              disabled={!isLoaded || isLoading}
+              variant="default"
+              className="w-full h-auto py-3 px-4 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left"
+            >
+              <Recycle className="h-5 w-5 flex-shrink-0" />
+              <span className="text-sm font-medium whitespace-normal break-words">Suggest Re-Purchase</span>
+            </Button>
+            <Button 
+              onClick={() => handleAction('healthier')} 
+              disabled={!isLoaded || isLoading}
+              variant="outline"
+              className="w-full h-auto py-3 px-4 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left"
+            >
+              <Wheat className="h-5 w-5 flex-shrink-0" />
+              <span className="text-sm font-medium whitespace-normal break-words">Healthier Options</span>
+            </Button>
+            <Button 
+              onClick={() => handleAction('expiry')} 
+              disabled={!isLoaded || isLoading}
+              variant="destructive"
+              className="w-full h-auto py-3 px-4 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left"
+            >
+              <AlertTriangle className="h-5 w-5 flex-shrink-0" />
+              <span className="text-sm font-medium whitespace-normal break-words">Check Expiry</span>
+            </Button>
+          </div>
         </CardContent>
       </Card>
 
-      <Card className="min-h-[200px]">
-        <CardHeader className="flex flex-row items-center gap-3">
-          {icon}
-          <CardTitle className="font-headline">{title}</CardTitle>
+      <Card className="min-h-[280px]">
+        <CardHeader className="pb-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-primary/10">
+              {icon}
+            </div>
+            <div className="flex-1">
+              <CardTitle className="font-headline text-lg">{title}</CardTitle>
+              {suggestions.length > 0 && !isLoading && (
+                <Badge variant="secondary" className="mt-1.5 text-xs">
+                  {suggestions.length} {suggestions.length === 1 ? 'suggestion' : 'suggestions'}
+                </Badge>
+              )}
+            </div>
+          </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-0">
           {isLoading ? (
-            <div className="flex justify-center items-center py-8">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <div className="flex flex-col justify-center items-center py-16 space-y-3">
+              <Loader2 className="h-10 w-10 animate-spin text-primary" />
+              <p className="text-sm text-muted-foreground">Analyzing your data...</p>
             </div>
           ) : (
             suggestions.length > 0 ? (
-              <ul className="space-y-2 list-disc pl-5 text-sm text-foreground">
+              <div className="space-y-3">
                 {suggestions.map((suggestion, index) => (
-                  <li key={index}>{suggestion}</li>
+                  <div
+                    key={index}
+                    className="p-4 rounded-lg border bg-card hover:bg-muted/50 transition-colors"
+                  >
+                    <p className="text-sm text-foreground leading-relaxed">{suggestion}</p>
+                  </div>
                 ))}
-              </ul>
+              </div>
             ) : (
-              <p className="text-muted-foreground text-center py-8">Click a button above to see suggestions here.</p>
+              <div className="flex flex-col justify-center items-center py-16 space-y-3">
+                <Lightbulb className="h-12 w-12 text-muted-foreground/50" />
+                <div className="text-center space-y-1">
+                  <p className="text-sm font-medium text-foreground">No suggestions yet</p>
+                  <p className="text-xs text-muted-foreground">
+                    Click a button above to get personalized suggestions
+                  </p>
+                </div>
+              </div>
             )
           )}
         </CardContent>

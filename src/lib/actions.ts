@@ -3,7 +3,8 @@
 import { checkExpiringItems } from '@/ai/flows/check-expiring-items';
 import { suggestHealthierAlternatives } from '@/ai/flows/suggest-healthier-alternatives';
 import { suggestRePurchase } from '@/ai/flows/suggest-re-purchase';
-import type { PurchaseHistoryItem } from '@/lib/types';
+import { getAllRuleBasedSuggestions } from '@/lib/rules-engine';
+import type { PurchaseHistoryItem, GroceryItem } from '@/lib/types';
 
 export async function getRepurchaseSuggestions(
   purchaseHistory: PurchaseHistoryItem[],
@@ -14,6 +15,20 @@ export async function getRepurchaseSuggestions(
       return ["Your purchase history is empty. Add items to get re-purchase suggestions."];
     }
     
+    // First, use rule-based engine
+    const groceryItems: GroceryItem[] = currentGroceryList.map(name => ({
+      id: '',
+      name,
+      addedDate: new Date().toISOString(),
+    }));
+    
+    const ruleBased = getAllRuleBasedSuggestions(purchaseHistory, groceryItems);
+    
+    if (ruleBased.rePurchase.length > 0) {
+      return ruleBased.rePurchase.map(s => `${s.item}: ${s.reason}`);
+    }
+    
+    // Fallback to AI if no rule-based suggestions
     const historyForAI = purchaseHistory.map(item => ({
       itemName: item.itemName,
       purchaseDate: item.purchaseDate,
@@ -39,6 +54,21 @@ export async function getHealthierAlternatives(groceryList: string[]) {
     if (groceryList.length === 0) {
       return ["Your grocery list is empty. Add items to get healthier suggestions."];
     }
+    
+    // First, use rule-based engine
+    const groceryItems: GroceryItem[] = groceryList.map(name => ({
+      id: '',
+      name,
+      addedDate: new Date().toISOString(),
+    }));
+    
+    const ruleBased = getAllRuleBasedSuggestions([], groceryItems);
+    
+    if (ruleBased.healthier.length > 0) {
+      return ruleBased.healthier.map(s => `${s.item}: ${s.reason}`);
+    }
+    
+    // Fallback to AI
     const result = await suggestHealthierAlternatives({ groceryList });
     if (result.suggestions.length === 0) {
         return ["No healthier alternatives found for the items on your list."];
@@ -56,6 +86,14 @@ export async function getExpiryReminders(purchaseHistory: PurchaseHistoryItem[])
       return ["Your purchase history is empty. Add items to track their expiry."];
     }
 
+    // First, use rule-based engine
+    const ruleBased = getAllRuleBasedSuggestions(purchaseHistory, []);
+    
+    if (ruleBased.expiry.length > 0) {
+      return ruleBased.expiry.map(e => e.message);
+    }
+
+    // Fallback to AI
     const historyForAI = purchaseHistory.map(item => ({
       itemName: item.itemName,
       purchaseDate: item.purchaseDate,
