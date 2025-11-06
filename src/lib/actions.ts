@@ -15,7 +15,7 @@ export async function getRepurchaseSuggestions(
     }
     
     const historyForAI = purchaseHistory.map(item => ({
-      itemName: item.name,
+      itemName: item.itemName,
       purchaseDate: item.purchaseDate,
     }));
 
@@ -57,7 +57,7 @@ export async function getExpiryReminders(purchaseHistory: PurchaseHistoryItem[])
     }
 
     const historyForAI = purchaseHistory.map(item => ({
-      itemName: item.name,
+      itemName: item.itemName,
       purchaseDate: item.purchaseDate,
       expiryTimeInDays: item.expiryTimeInDays,
     }));

@@ -1,6 +1,5 @@
 export interface PurchaseHistoryItem {
-  id: string;
-  name: string;
+  itemName: string;
   purchaseDate: string; // ISO string
   expiryTimeInDays: number;
 }

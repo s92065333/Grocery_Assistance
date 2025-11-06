@@ -60,14 +60,18 @@ export function useGroceryData() {
     });
 
     const newItem: PurchaseHistoryItem = {
-      id: new Date().toISOString() + Math.random(),
-      name: trimmedName,
+      itemName: trimmedName,
       purchaseDate: new Date().toISOString(),
       expiryTimeInDays: DEFAULT_EXPIRY_DAYS,
     };
     
     setPurchaseHistory(prev => {
-        // Optional: you could update the purchase date if the item already exists in history
+        const existingItemIndex = prev.findIndex(item => item.itemName === trimmedName);
+        if (existingItemIndex > -1) {
+            const updatedHistory = [...prev];
+            updatedHistory[existingItemIndex] = { ...updatedHistory[existingItemIndex], purchaseDate: new Date().toISOString() };
+            return updatedHistory;
+        }
         return [...prev, newItem];
     });
 
