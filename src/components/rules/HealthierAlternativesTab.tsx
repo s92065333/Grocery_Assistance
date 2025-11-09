@@ -31,26 +31,86 @@ import {
   updateHealthierAlternative,
   deleteHealthierAlternative,
 } from '@/lib/rules-storage';
+import { getAllDefaultHealthierAlternatives } from '@/lib/rules-engine';
 
 interface HealthierAlternativesTabProps {
   onRefresh: () => void;
 }
 
 export function HealthierAlternativesTab({ onRefresh }: HealthierAlternativesTabProps) {
-  const [rules, setRules] = useState(loadRules().healthierAlternatives);
+  // Get both default rules and user-customized rules
+  const defaultRules = getAllDefaultHealthierAlternatives();
+  const storedRules = loadRules().healthierAlternatives;
+  
+  // Create a map to track which rules are user-customized (have IDs)
+  const customRuleMap = new Map(storedRules.map(rule => [rule.unhealthyItem.toLowerCase(), rule]));
+  
+  // Merge: default rules + user customizations (user rules override defaults)
+  const allRules = defaultRules.map(defaultRule => {
+    const customRule = customRuleMap.get(defaultRule.unhealthyItem.toLowerCase());
+    if (customRule) {
+      return customRule; // Use custom rule if exists
+    }
+    // Create a temporary ID for default rules (they're not editable/deletable in UI)
+    return {
+      id: `default-${defaultRule.unhealthyItem.toLowerCase().replace(/\s+/g, '-')}`,
+      unhealthyItem: defaultRule.unhealthyItem,
+      healthyAlternative: defaultRule.healthyAlternative,
+      isDefault: true,
+    };
+  });
+  
+  // Add any custom rules that aren't in defaults
+  storedRules.forEach(customRule => {
+    const exists = defaultRules.some(dr => 
+      dr.unhealthyItem.toLowerCase() === customRule.unhealthyItem.toLowerCase()
+    );
+    if (!exists) {
+      allRules.push(customRule);
+    }
+  });
+  
+  const [rules, setRules] = useState(allRules);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [editingRule, setEditingRule] = useState<{ id: string; unhealthyItem: string; healthyAlternative: string } | null>(null);
+  const [editingRule, setEditingRule] = useState<{ id: string; unhealthyItem: string; healthyAlternative: string; isDefault?: boolean } | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
   const [formData, setFormData] = useState({ unhealthyItem: '', healthyAlternative: '' });
   const { toast } = useToast();
 
   const refreshRules = () => {
-    setRules(loadRules().healthierAlternatives);
+    const defaultRules = getAllDefaultHealthierAlternatives();
+    const storedRules = loadRules().healthierAlternatives;
+    const customRuleMap = new Map(storedRules.map(rule => [rule.unhealthyItem.toLowerCase(), rule]));
+    
+    const merged = defaultRules.map(defaultRule => {
+      const customRule = customRuleMap.get(defaultRule.unhealthyItem.toLowerCase());
+      if (customRule) {
+        return customRule;
+      }
+      return {
+        id: `default-${defaultRule.unhealthyItem.toLowerCase().replace(/\s+/g, '-')}`,
+        unhealthyItem: defaultRule.unhealthyItem,
+        healthyAlternative: defaultRule.healthyAlternative,
+        isDefault: true,
+      };
+    });
+    
+    storedRules.forEach(customRule => {
+      const exists = defaultRules.some(dr => 
+        dr.unhealthyItem.toLowerCase() === customRule.unhealthyItem.toLowerCase()
+      );
+      if (!exists) {
+        merged.push(customRule);
+      }
+    });
+    
+    setRules(merged);
     onRefresh();
   };
 
   const handleOpenDialog = (rule?: typeof editingRule) => {
     if (rule) {
+      // If it's a default rule, we'll create a custom rule when saved
       setEditingRule(rule);
       setFormData({ unhealthyItem: rule.unhealthyItem, healthyAlternative: rule.healthyAlternative });
     } else {
@@ -72,9 +132,30 @@ export function HealthierAlternativesTab({ onRefresh }: HealthierAlternativesTab
 
     try {
       if (editingRule) {
-        updateHealthierAlternative(editingRule.id, formData);
-        toast({ title: 'Rule updated', description: 'Healthier alternative rule has been updated.' });
+        // If editing a default rule (has isDefault flag), create a new custom rule instead
+        if ((editingRule as any).isDefault) {
+          // Check if a custom rule already exists for this item
+          const currentStoredRules = loadRules().healthierAlternatives;
+          const existingCustomRule = currentStoredRules.find(r => 
+            r.unhealthyItem.toLowerCase() === formData.unhealthyItem.toLowerCase()
+          );
+          
+          if (existingCustomRule) {
+            // Update existing custom rule
+            updateHealthierAlternative(existingCustomRule.id, formData);
+            toast({ title: 'Rule updated', description: 'Healthier alternative rule has been updated.' });
+          } else {
+            // Create new custom rule (this will override the default)
+            addHealthierAlternative(formData);
+            toast({ title: 'Custom rule added', description: 'A custom rule has been created to override the default.' });
+          }
+        } else {
+          // Update existing custom rule
+          updateHealthierAlternative(editingRule.id, formData);
+          toast({ title: 'Rule updated', description: 'Healthier alternative rule has been updated.' });
+        }
       } else {
+        // Adding new rule
         addHealthierAlternative(formData);
         toast({ title: 'Rule added', description: 'New healthier alternative rule has been added.' });
       }
@@ -90,6 +171,20 @@ export function HealthierAlternativesTab({ onRefresh }: HealthierAlternativesTab
   };
 
   const handleDelete = (id: string) => {
+    const rule = rules.find(r => r.id === id);
+    
+    // If it's a default rule, we can't delete it (it's a system default)
+    // But we can create a custom rule with the same unhealthy item to "hide" it
+    if (rule && (rule as any).isDefault) {
+      toast({
+        title: 'Default Rule',
+        description: 'Default rules cannot be deleted. They are system defaults. You can add a custom rule to override it.',
+        variant: 'default',
+      });
+      setDeleteTarget(null);
+      return;
+    }
+    
     try {
       deleteHealthierAlternative(id);
       toast({ title: 'Rule deleted', description: 'Healthier alternative rule has been deleted.' });

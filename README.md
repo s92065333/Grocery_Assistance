@@ -94,4 +94,17 @@ The application will be available at [http://localhost:9002](http://localhost:90
   - `src/ai/flows/`: Genkit flows that define the AI agent's behavior.
 - `src/hooks/`: Custom React hooks, like `useGroceryData` for managing `localStorage`.
 - `src/lib/`: Contains utility functions, server actions, and type definitions.
+  - `src/lib/rules-engine.ts`: Core rule-based engine with 550+ healthier alternatives, 150+ category associations, and 250+ expiry rules.
+  - `src/lib/rules-storage.ts`: Manages rule storage and customization.
 - `public/`: Static assets.
+- `docs/`: Documentation files including application flow diagrams.
+
+## Application Flow Diagrams
+
+For detailed visualizations of the application architecture and data flow, see:
+- [Complete Application Flow Diagrams](./docs/application-flow-diagram.md) - Comprehensive Mermaid diagrams showing:
+  - System Architecture
+  - Detailed Process Flow
+  - Rule-Based Decision Flow
+  - Data Flow Diagram
+  - Component Interaction Diagram
