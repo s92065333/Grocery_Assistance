@@ -1,35 +1,24 @@
-import type {NextConfig} from 'next';
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  output: 'export',
+  // TypeScript / ESLint settings (use with caution)
+  typescript: { ignoreBuildErrors: true },
+  eslint: { ignoreDuringBuilds: true },
+
+  // Images: merged remotePatterns + unoptimized for static export
   images: {
+    unoptimized: true,
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'placehold.co',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'picsum.photos',
-        port: '',
-        pathname: '/**',
-      },
+      { protocol: 'https', hostname: 'placehold.co', pathname: '/**' },
+      { protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'picsum.photos', pathname: '/**' },
     ],
   },
+
+  // Paths: basePath should not end with a slash; assetPrefix typically ends with a slash
+  basePath: '/Smart-Grocery-Shopping-Assistant-Rule-Based-Web-Application-',
+  assetPrefix: '/Smart-Grocery-Shopping-Assistant-Rule-Based-Web-Application-/',
 };
 
 export default nextConfig;
