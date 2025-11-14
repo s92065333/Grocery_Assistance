@@ -15,12 +15,17 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-export function getFirebaseApp(): FirebaseApp {
+export function isFirebaseConfigured(): boolean {
+  return !!(firebaseConfig.apiKey && firebaseConfig.projectId);
+}
+
+export function getFirebaseApp(): FirebaseApp | null {
+  if (!isFirebaseConfigured()) {
+    return null;
+  }
+  
   if (!app) {
     if (getApps().length === 0) {
-      if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
-        throw new Error('Firebase configuration is missing. Please check your environment variables.');
-      }
       app = initializeApp(firebaseConfig);
     } else {
       app = getApps()[0];
@@ -29,17 +34,31 @@ export function getFirebaseApp(): FirebaseApp {
   return app;
 }
 
-export function getFirebaseAuth(): Auth {
+export function getFirebaseAuth(): Auth | null {
+  if (!isFirebaseConfigured()) {
+    return null;
+  }
+  
   if (!auth) {
     const app = getFirebaseApp();
+    if (!app) {
+      return null;
+    }
     auth = getAuth(app);
   }
   return auth;
 }
 
-export function getFirestoreDb(): Firestore {
+export function getFirestoreDb(): Firestore | null {
+  if (!isFirebaseConfigured()) {
+    return null;
+  }
+  
   if (!db) {
     const app = getFirebaseApp();
+    if (!app) {
+      return null;
+    }
     db = getFirestore(app);
   }
   return db;

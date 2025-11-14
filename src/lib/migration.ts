@@ -16,8 +16,14 @@ const PURCHASE_HISTORY_KEY = 'smart_shopper_purchase_history';
 
 export async function migrateLocalStorageToFirestore(userId: string): Promise<void> {
   try {
-    // Check if migration already happened
+    // Check if Firebase is configured
     const db = getFirestoreDb();
+    if (!db) {
+      // Firebase is not configured, skip migration
+      return;
+    }
+    
+    // Check if migration already happened
     const groceryListRef = collection(db, `users/${userId}/groceryList`);
     const groceryListSnapshot = await getDocs(groceryListRef);
     

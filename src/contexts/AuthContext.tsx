@@ -28,6 +28,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const auth = getFirebaseAuth();
+    
+    // If Firebase is not configured, skip authentication
+    if (!auth) {
+      setLoading(false);
+      return;
+    }
+    
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
@@ -38,21 +45,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signIn = async (email: string, password: string) => {
     const auth = getFirebaseAuth();
+    if (!auth) {
+      throw new Error('Firebase is not configured. Authentication is not available.');
+    }
     await signInWithEmailAndPassword(auth, email, password);
   };
 
   const signUp = async (email: string, password: string) => {
     const auth = getFirebaseAuth();
+    if (!auth) {
+      throw new Error('Firebase is not configured. Authentication is not available.');
+    }
     await createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signOut = async () => {
     const auth = getFirebaseAuth();
+    if (!auth) {
+      return;
+    }
     await firebaseSignOut(auth);
   };
 
   const resetPassword = async (email: string) => {
     const auth = getFirebaseAuth();
+    if (!auth) {
+      throw new Error('Firebase is not configured. Password reset is not available.');
+    }
     await sendPasswordResetEmail(auth, email);
   };
 
