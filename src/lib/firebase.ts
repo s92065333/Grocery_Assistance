@@ -25,10 +25,15 @@ export function getFirebaseApp(): FirebaseApp | null {
   }
   
   if (!app) {
-    if (getApps().length === 0) {
-      app = initializeApp(firebaseConfig);
-    } else {
-      app = getApps()[0];
+    try {
+      if (getApps().length === 0) {
+        app = initializeApp(firebaseConfig);
+      } else {
+        app = getApps()[0];
+      }
+    } catch (error) {
+      console.warn('Failed to initialize Firebase:', error);
+      return null;
     }
   }
   return app;
