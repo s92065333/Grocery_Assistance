@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },
 
-  // Images: merged remotePatterns + unoptimized for static export
+  // Images: remotePatterns configuration
   images: {
     unoptimized: true,
     remotePatterns: [
