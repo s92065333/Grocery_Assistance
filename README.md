@@ -1,4 +1,5 @@
 # Smart Shopper
+Link : https://smart-grocery-shopping-assistant-ru.vercel.app
 
 Smart Shopper is an intelligent grocery list application designed to enhance your shopping experience. It helps you manage your grocery list, suggests re-purchases, offers healthier alternatives, and sends reminders for expiring items, all powered by AI.
 
