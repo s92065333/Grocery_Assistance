@@ -45,11 +45,16 @@ export function getFirebaseAuth(): Auth | null {
   }
   
   if (!auth) {
-    const app = getFirebaseApp();
-    if (!app) {
+    try {
+      const app = getFirebaseApp();
+      if (!app) {
+        return null;
+      }
+      auth = getAuth(app);
+    } catch (error) {
+      console.warn('Failed to get Firebase Auth:', error);
       return null;
     }
-    auth = getAuth(app);
   }
   return auth;
 }
@@ -60,11 +65,16 @@ export function getFirestoreDb(): Firestore | null {
   }
   
   if (!db) {
-    const app = getFirebaseApp();
-    if (!app) {
+    try {
+      const app = getFirebaseApp();
+      if (!app) {
+        return null;
+      }
+      db = getFirestore(app);
+    } catch (error) {
+      console.warn('Failed to get Firestore:', error);
       return null;
     }
-    db = getFirestore(app);
   }
   return db;
 }
