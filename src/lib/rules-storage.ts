@@ -53,6 +53,11 @@ const DEFAULT_RULES: StoredRules = {
 };
 
 export function loadRules(): StoredRules {
+  // Check if we're in a browser environment
+  if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+    return DEFAULT_RULES;
+  }
+  
   try {
     const stored = localStorage.getItem(RULES_STORAGE_KEY);
     if (stored) {
@@ -72,6 +77,12 @@ export function loadRules(): StoredRules {
 }
 
 export function saveRules(rules: StoredRules): void {
+  // Check if we're in a browser environment
+  if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+    console.warn('localStorage is not available. Cannot save rules.');
+    return;
+  }
+  
   try {
     localStorage.setItem(RULES_STORAGE_KEY, JSON.stringify(rules));
   } catch (error) {

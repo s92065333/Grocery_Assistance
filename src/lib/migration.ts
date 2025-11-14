@@ -26,7 +26,11 @@ export async function migrateLocalStorageToFirestore(userId: string): Promise<vo
       return;
     }
 
-    // Get data from localStorage
+    // Get data from localStorage (only in browser)
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+      return;
+    }
+    
     const storedGroceryList = localStorage.getItem(GROCERY_LIST_KEY);
     const storedPurchaseHistory = localStorage.getItem(PURCHASE_HISTORY_KEY);
 

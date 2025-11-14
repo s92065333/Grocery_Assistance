@@ -14,10 +14,6 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'picsum.photos', pathname: '/**' },
     ],
   },
-
-  // Paths: basePath should not end with a slash; assetPrefix typically ends with a slash
-  basePath: '/Smart-Grocery-Shopping-Assistant-Rule-Based-Web-Application-',
-  assetPrefix: '/Smart-Grocery-Shopping-Assistant-Rule-Based-Web-Application-/',
 };
 
 export default nextConfig;
