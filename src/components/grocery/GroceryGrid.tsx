@@ -34,9 +34,9 @@ export function GroceryGrid({ groceryList, onRemoveItem, onEditItem, isLoaded }:
 
     if (!isLoaded) {
         return (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {[1, 2, 3, 4, 5, 6].map((i) => (
-                    <Skeleton key={i} className="h-32 w-full rounded-2xl bg-white/10" />
+                    <Skeleton key={i} className="h-40 w-full rounded-lg bg-gray-200 dark:bg-gray-800" />
                 ))}
             </div>
         );
@@ -44,12 +44,12 @@ export function GroceryGrid({ groceryList, onRemoveItem, onEditItem, isLoaded }:
 
     if (groceryList.length === 0) {
         return (
-            <div className="flex flex-col items-center justify-center py-20 text-center">
-                <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-white/5 mb-6 border border-white/10">
-                    <ShoppingCart className="h-10 w-10 text-muted-foreground/50" />
+            <div className="flex flex-col items-center justify-center py-16 text-center">
+                <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
+                    <ShoppingCart className="h-8 w-8 text-gray-400 dark:text-gray-500" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground">Your list is empty</h3>
-                <p className="text-muted-foreground mt-2 max-w-sm mx-auto">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Your list is empty</h3>
+                <p className="text-gray-600 dark:text-gray-400 mt-1.5 max-w-sm mx-auto text-sm">
                     Start adding items to your grocery list to keep track of what you need.
                 </p>
             </div>
@@ -60,10 +60,10 @@ export function GroceryGrid({ groceryList, onRemoveItem, onEditItem, isLoaded }:
         <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {groceryList.map((item) => (
-                    <Card key={item.id} className="glass-card border-0 group relative overflow-hidden transition-all hover:-translate-y-1">
+                    <Card key={item.id} className="group relative overflow-hidden transition-all hover:shadow-md border-gray-200 dark:border-gray-800">
                         <CardContent className="p-5">
-                            <div className="flex justify-between items-start mb-3">
-                                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-primary font-bold text-lg">
+                            <div className="flex justify-between items-start mb-4">
+                                <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold text-lg shadow-sm">
                                     {item.name.charAt(0).toUpperCase()}
                                 </div>
                                 <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -71,7 +71,7 @@ export function GroceryGrid({ groceryList, onRemoveItem, onEditItem, isLoaded }:
                                         variant="ghost"
                                         size="icon"
                                         onClick={() => handleEditClick(item)}
-                                        className="h-8 w-8 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-full"
+                                        className="h-8 w-8 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/20"
                                     >
                                         <Edit className="h-4 w-4" />
                                     </Button>
@@ -79,17 +79,17 @@ export function GroceryGrid({ groceryList, onRemoveItem, onEditItem, isLoaded }:
                                         variant="ghost"
                                         size="icon"
                                         onClick={() => onRemoveItem(item.id)}
-                                        className="h-8 w-8 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-full"
+                                        className="h-8 w-8 text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/20"
                                     >
                                         <Trash2 className="h-4 w-4" />
                                     </Button>
                                 </div>
                             </div>
 
-                            <h3 className="font-bold text-lg text-foreground truncate mb-1">{item.name}</h3>
+                            <h3 className="font-semibold text-base text-gray-900 dark:text-white truncate mb-2">{item.name}</h3>
 
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                                <span className="font-medium bg-white/10 px-2 py-0.5 rounded-md text-foreground">
+                            <div className="flex items-center gap-2 flex-wrap mb-3">
+                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 px-2.5 py-1 rounded-md">
                                     {item.quantity && item.unit
                                         ? `${item.quantity} ${item.unit}`
                                         : item.quantity
@@ -97,15 +97,15 @@ export function GroceryGrid({ groceryList, onRemoveItem, onEditItem, isLoaded }:
                                             : '1'}
                                 </span>
                                 {item.category && (
-                                    <Badge variant="secondary" className="bg-white/5 hover:bg-white/10 text-xs font-normal">
+                                    <Badge variant="secondary" className="text-xs font-normal bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800">
                                         {item.category}
                                     </Badge>
                                 )}
                             </div>
 
                             {item.expiryDate && (
-                                <div className="flex items-center gap-1.5 text-xs text-orange-500/80 mt-2 bg-orange-500/5 p-2 rounded-lg border border-orange-500/10">
-                                    <Clock className="h-3 w-3" />
+                                <div className="flex items-center gap-2 text-xs text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/20 px-3 py-2 rounded-md border border-amber-200 dark:border-amber-800/50">
+                                    <Clock className="h-3.5 w-3.5" />
                                     <span>Expires {new Date(item.expiryDate).toLocaleDateString()}</span>
                                 </div>
                             )}

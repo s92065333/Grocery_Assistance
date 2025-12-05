@@ -161,41 +161,41 @@ export function ChatInterface({ groceryList, purchaseHistory, onAddItem, onRemov
   };
 
   return (
-    <Card className="glass-card border-0 h-[calc(100vh-12rem)] flex flex-col shadow-xl overflow-hidden">
-      <CardHeader className="pb-4 border-b border-white/10 bg-white/40 dark:bg-black/20 backdrop-blur-md">
-        <CardTitle className="font-heading flex items-center gap-2 text-xl">
-          <div className="p-2 rounded-lg bg-primary/10">
-            <Sparkles className="h-5 w-5 text-primary" />
+    <div className="h-full flex flex-col bg-white dark:bg-gray-900 overflow-hidden">
+      <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+        <CardTitle className="flex items-center gap-3 text-lg font-semibold text-gray-900 dark:text-white">
+          <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-950/50">
+            <Sparkles className="h-5 w-5 text-blue-600 dark:text-blue-400" />
           </div>
           AI Assistant
         </CardTitle>
-        <CardDescription className="mt-1 ml-11">Chat with your grocery shopping assistant</CardDescription>
+        <CardDescription className="mt-1 ml-11 text-gray-600 dark:text-gray-400">Chat with your grocery shopping assistant</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col flex-1 min-h-0 p-0">
         <ScrollArea className="flex-1 p-6" ref={scrollRef}>
-          <div className="space-y-6">
+          <div className="space-y-4">
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}
+                className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {message.role === 'assistant' && (
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md mt-1">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-sm mt-1">
                     <Bot className="h-4 w-4 text-white" />
                   </div>
                 )}
                 <div
                   className={cn(
-                    "max-w-[85%] rounded-2xl p-4 shadow-sm",
+                    "max-w-[85%] rounded-lg p-3.5 shadow-sm",
                     message.role === 'user'
-                      ? "bg-primary text-primary-foreground rounded-tr-sm"
-                      : "bg-white dark:bg-card border border-white/20 text-foreground rounded-tl-sm"
+                      ? "bg-blue-600 text-white rounded-tr-sm"
+                      : "bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white rounded-tl-sm"
                   )}
                 >
                   <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
                   {message.reasoning && (
-                    <div className="mt-3 pt-3 border-t border-border/10">
-                      <p className="text-xs opacity-70 italic flex items-center gap-1">
+                    <div className="mt-2.5 pt-2.5 border-t border-gray-200 dark:border-gray-700">
+                      <p className="text-xs text-gray-500 dark:text-gray-400 italic flex items-center gap-1.5">
                         <Sparkles className="h-3 w-3" />
                         Reasoning: {message.reasoning}
                       </p>
@@ -203,47 +203,47 @@ export function ChatInterface({ groceryList, purchaseHistory, onAddItem, onRemov
                   )}
                 </div>
                 {message.role === 'user' && (
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-muted flex items-center justify-center mt-1">
-                    <User className="h-4 w-4 text-muted-foreground" />
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center mt-1">
+                    <User className="h-4 w-4 text-gray-600 dark:text-gray-300" />
                   </div>
                 )}
               </div>
             ))}
             {isLoading && (
-              <div className="flex gap-3 justify-start animate-fade-in">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md">
+              <div className="flex gap-3 justify-start">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-sm">
                   <Bot className="h-4 w-4 text-white" />
                 </div>
-                <div className="bg-white dark:bg-card border border-white/20 rounded-2xl rounded-tl-sm p-4 shadow-sm flex items-center gap-2">
-                  <Loader2 className="h-4 w-4 animate-spin text-primary" />
-                  <span className="text-sm text-muted-foreground">Thinking...</span>
+                <div className="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg rounded-tl-sm p-3.5 shadow-sm flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin text-blue-600 dark:text-blue-400" />
+                  <span className="text-sm text-gray-600 dark:text-gray-400">Thinking...</span>
                 </div>
               </div>
             )}
           </div>
         </ScrollArea>
-        <div className="p-4 border-t border-white/10 bg-white/40 dark:bg-black/20 backdrop-blur-md">
-          <div className="flex gap-3 relative">
+        <div className="p-4 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+          <div className="flex gap-2 relative">
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Type your message... (e.g., 'Add 2kg rice', 'What should I buy?')"
               disabled={isLoading}
-              className="flex-1 pl-4 pr-12 h-12 rounded-full bg-white/80 dark:bg-black/40 border-white/20 focus:ring-2 focus:ring-primary/20 transition-all shadow-sm"
+              className="flex-1 pl-4 pr-12 h-11 rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
             />
             <Button
               onClick={handleSend}
               disabled={isLoading || !input.trim()}
               size="icon"
-              className="absolute right-1 top-1 h-10 w-10 rounded-full shadow-md hover:shadow-lg transition-all"
+              className="absolute right-1 top-1 h-9 w-9 rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
             >
               <Send className="h-4 w-4" />
             </Button>
           </div>
         </div>
       </CardContent>
-    </Card>
+    </div>
   );
 }
 

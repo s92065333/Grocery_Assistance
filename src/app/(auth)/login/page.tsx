@@ -50,26 +50,26 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center p-4">
-      <div className="w-full max-w-md animate-fade-in">
+      <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-tr from-primary to-accent shadow-xl mb-4">
+          <div className="inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 shadow-lg mb-4">
             <ShoppingBag className="h-8 w-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold font-heading tracking-tight text-foreground">Welcome Back</h1>
-          <p className="text-muted-foreground mt-2">Sign in to continue your smart shopping journey</p>
+          <h1 className="text-3xl font-bold font-heading tracking-tight text-gray-900 dark:text-white">Welcome Back</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-2">Sign in to continue your smart shopping journey</p>
         </div>
 
-        <Card className="glass-card border-0">
-          <CardHeader className="space-y-1 pb-2">
-            <CardTitle className="text-xl font-semibold">Sign In</CardTitle>
-            <CardDescription>Enter your credentials to access your account</CardDescription>
+        <Card className="border-gray-200 dark:border-gray-800 shadow-lg">
+          <CardHeader className="space-y-1 pb-4">
+            <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Sign In</CardTitle>
+            <CardDescription className="text-gray-600 dark:text-gray-400">Enter your credentials to access your account</CardDescription>
           </CardHeader>
-          <CardContent className="pt-6">
+          <CardContent className="pt-2">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
                 {error && (
-                  <Alert variant="destructive" className="animate-slide-in">
-                    <AlertDescription>{error}</AlertDescription>
+                  <Alert variant="destructive" className="border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/20">
+                    <AlertDescription className="text-red-800 dark:text-red-300">{error}</AlertDescription>
                   </Alert>
                 )}
                 <FormField
@@ -77,14 +77,14 @@ export default function LoginPage() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel className="text-gray-900 dark:text-white">Email</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                          <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
                           <Input
                             type="email"
                             placeholder="hello@example.com"
-                            className="pl-9 bg-white/50 dark:bg-black/20 border-white/20 focus:bg-white dark:focus:bg-black/40 transition-all"
+                            className="pl-9 bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
                             {...field}
                             disabled={isLoading}
                           />
@@ -99,14 +99,14 @@ export default function LoginPage() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel className="text-gray-900 dark:text-white">Password</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                          <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
                           <Input
                             type="password"
                             placeholder="••••••••"
-                            className="pl-9 bg-white/50 dark:bg-black/20 border-white/20 focus:bg-white dark:focus:bg-black/40 transition-all"
+                            className="pl-9 bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
                             {...field}
                             disabled={isLoading}
                           />
@@ -116,7 +116,7 @@ export default function LoginPage() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full h-11 text-base font-medium shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all" disabled={isLoading}>
+                <Button type="submit" className="w-full h-11 text-base font-medium bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow-md transition-all" disabled={isLoading}>
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -132,8 +132,8 @@ export default function LoginPage() {
               </form>
             </Form>
             <div className="mt-6 text-center text-sm">
-              <span className="text-muted-foreground">Don't have an account? </span>
-              <Link href="/signup" className="font-semibold text-primary hover:text-primary/80 hover:underline transition-colors">
+              <span className="text-gray-600 dark:text-gray-400">Don't have an account? </span>
+              <Link href="/signup" className="font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline transition-colors">
                 Create account
               </Link>
             </div>

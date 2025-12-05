@@ -21,20 +21,22 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-sans antialiased h-screen w-screen overflow-hidden bg-background text-foreground selection:bg-primary/20 selection:text-primary">
+      <body className="font-sans antialiased h-screen w-screen overflow-hidden bg-gray-50 dark:bg-gray-950 text-foreground">
         <AuthProvider>
           <div className="flex h-full w-full relative">
-            {/* Background decoration - Deep Space / Abstract Mesh */}
-            <div className="fixed inset-0 -z-10 h-full w-full bg-[#0a0a0a] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-            <div className="fixed top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay pointer-events-none"></div>
+            {/* Subtle background pattern */}
+            <div className="fixed inset-0 -z-10 h-full w-full bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950"></div>
+            <div className="fixed inset-0 -z-10 h-full w-full bg-[radial-gradient(circle_at_1px_1px,rgba(0,0,0,0.03)_1px,transparent_0)] dark:bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.03)_1px,transparent_0)] bg-[size:20px_20px]"></div>
 
             {/* Sidebar */}
             <Sidebar />
 
             {/* Main Content Area */}
-            <main className="flex-1 h-full overflow-hidden relative md:pl-72 transition-all duration-300">
-              <div className="h-full w-full overflow-y-auto no-scrollbar p-4 md:p-8">
-                {children}
+            <main className="flex-1 h-full overflow-hidden relative md:pl-64 transition-all duration-300">
+              <div className="h-full w-full overflow-y-auto">
+                <div className="max-w-7xl mx-auto p-6 md:p-8">
+                  {children}
+                </div>
               </div>
             </main>
           </div>

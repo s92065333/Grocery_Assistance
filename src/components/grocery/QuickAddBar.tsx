@@ -49,40 +49,37 @@ export function QuickAddBar({ onAddItem, disabled }: QuickAddBarProps) {
     }
 
     return (
-        <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="relative flex items-center gap-2 bg-white/80 dark:bg-black/40 backdrop-blur-xl border border-white/20 p-2 rounded-full shadow-2xl transition-all focus-within:ring-2 focus-within:ring-primary/20">
-                    <div className="pl-3 text-muted-foreground">
-                        <Plus className="h-5 w-5" />
-                    </div>
-                    <FormField
-                        control={form.control}
-                        name="input"
-                        render={({ field }) => (
-                            <FormItem className="flex-1 mb-0">
-                                <FormControl>
-                                    <Input
-                                        placeholder="Quick add item (e.g. '2kg Rice')..."
-                                        className="border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 h-10 text-base placeholder:text-muted-foreground/50"
-                                        {...field}
-                                        disabled={disabled}
-                                        autoComplete="off"
-                                    />
-                                </FormControl>
-                            </FormItem>
-                        )}
-                    />
-                    <Button
-                        type="submit"
-                        disabled={disabled || !form.formState.isValid}
-                        size="icon"
-                        className="rounded-full h-10 w-10 bg-primary hover:bg-primary/90 text-white shadow-lg shrink-0"
-                    >
-                        <ArrowRight className="h-5 w-5" />
-                    </Button>
-                </form>
-            </Form>
-        </div>
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="relative flex items-center gap-2 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-all focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
+                <div className="pl-4 text-gray-400 dark:text-gray-500">
+                    <Plus className="h-5 w-5" />
+                </div>
+                <FormField
+                    control={form.control}
+                    name="input"
+                    render={({ field }) => (
+                        <FormItem className="flex-1 mb-0">
+                            <FormControl>
+                                <Input
+                                    placeholder="Quick add item (e.g. '2kg Rice')..."
+                                    className="border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 h-11 text-sm placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                                    {...field}
+                                    disabled={disabled}
+                                    autoComplete="off"
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
+                <Button
+                    type="submit"
+                    disabled={disabled || !form.formState.isValid}
+                    size="icon"
+                    className="h-11 w-11 mr-1 bg-blue-600 hover:bg-blue-700 text-white shadow-sm shrink-0 rounded-lg"
+                >
+                    <ArrowRight className="h-4 w-4" />
+                </Button>
+            </form>
+        </Form>
     );
 }

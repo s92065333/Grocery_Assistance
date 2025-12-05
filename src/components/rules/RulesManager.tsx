@@ -107,40 +107,40 @@ export default function RulesManager() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-8 py-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b">
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-gray-200 dark:border-gray-800">
         <div className="space-y-1">
-          <h1 className="text-3xl font-bold font-headline">Rules Management</h1>
-          <p className="text-muted-foreground text-sm sm:text-base">
+          <h1 className="text-3xl font-bold font-heading text-gray-900 dark:text-white">Rules Management</h1>
+          <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
             Manage your grocery shopping assistant rules. Add, edit, or delete rules to customize suggestions.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Button variant="outline" size="sm" onClick={handleExport}>
+          <Button variant="outline" size="sm" onClick={handleExport} className="border-gray-300 dark:border-gray-700">
             <Download className="mr-2 h-4 w-4" />
             Export
           </Button>
-          <Button variant="outline" size="sm" onClick={handleImport}>
+          <Button variant="outline" size="sm" onClick={handleImport} className="border-gray-300 dark:border-gray-700">
             <Upload className="mr-2 h-4 w-4" />
             Import
           </Button>
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="border-gray-300 dark:border-gray-700">
                 <RotateCcw className="mr-2 h-4 w-4" />
                 Reset
               </Button>
             </AlertDialogTrigger>
-            <AlertDialogContent>
+            <AlertDialogContent className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
               <AlertDialogHeader>
-                <AlertDialogTitle>Reset to Default Rules?</AlertDialogTitle>
-                <AlertDialogDescription>
+                <AlertDialogTitle className="text-gray-900 dark:text-white">Reset to Default Rules?</AlertDialogTitle>
+                <AlertDialogDescription className="text-gray-600 dark:text-gray-400">
                   This will replace all your custom rules with the default rules. This action cannot be undone.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={handleReset}>Reset</AlertDialogAction>
+                <AlertDialogCancel className="border-gray-300 dark:border-gray-700">Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={handleReset} className="bg-blue-600 hover:bg-blue-700">Reset</AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
@@ -148,11 +148,11 @@ export default function RulesManager() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 gap-2 mb-8">
-          <TabsTrigger value="healthier" className="text-sm">Healthier Alternatives</TabsTrigger>
-          <TabsTrigger value="category" className="text-sm">Category Associations</TabsTrigger>
-          <TabsTrigger value="expiry" className="text-sm">Expiry Rules</TabsTrigger>
-          <TabsTrigger value="custom" className="text-sm">Custom Rules</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 gap-2 mb-6 bg-gray-100 dark:bg-gray-800">
+          <TabsTrigger value="healthier" className="text-sm data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900">Healthier Alternatives</TabsTrigger>
+          <TabsTrigger value="category" className="text-sm data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900">Category Associations</TabsTrigger>
+          <TabsTrigger value="expiry" className="text-sm data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900">Expiry Rules</TabsTrigger>
+          <TabsTrigger value="custom" className="text-sm data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900">Custom Rules</TabsTrigger>
         </TabsList>
 
         <TabsContent value="healthier" className="mt-0">

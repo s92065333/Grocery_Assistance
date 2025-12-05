@@ -57,40 +57,40 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
   };
 
   return (
-    <div className="space-y-6">
-      <Card className="glass-card border-0 bg-gradient-to-br from-primary/5 to-accent/5">
+    <div className="space-y-5">
+      <Card className="border-gray-200 dark:border-gray-800">
         <CardHeader className="pb-4">
-          <div className="flex items-center gap-2 mb-1">
-            <div className="p-2 rounded-lg bg-primary/10">
-              <Sparkles className="h-5 w-5 text-primary" />
+          <div className="flex items-center gap-3 mb-1">
+            <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-950/50">
+              <Sparkles className="h-5 w-5 text-blue-600 dark:text-blue-400" />
             </div>
-            <CardTitle className="font-heading text-lg">AI Assistant</CardTitle>
+            <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">AI Assistant</CardTitle>
           </div>
-          <CardDescription className="text-sm">
+          <CardDescription className="text-sm text-gray-600 dark:text-gray-400">
             Get smart suggestions for your groceries based on your purchase history and preferences.
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-0">
-          <div className="grid grid-cols-1 gap-3">
+          <div className="grid grid-cols-1 gap-2.5">
             <Button
               onClick={() => handleAction('re-purchase')}
               disabled={!isLoaded || isLoading}
               variant="outline"
               className={cn(
-                "w-full justify-between h-auto py-4 px-4 bg-white/50 dark:bg-black/20 border-white/20 hover:bg-white/80 transition-all group",
-                activeAction === 're-purchase' && "border-primary/50 bg-primary/5"
+                "w-full justify-between h-auto py-3 px-4 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all group",
+                activeAction === 're-purchase' && "border-blue-500 bg-blue-50 dark:bg-blue-950/20"
               )}
             >
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                <div className="p-1.5 rounded-md bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
                   <Recycle className="h-4 w-4" />
                 </div>
                 <div className="text-left">
-                  <div className="font-semibold text-foreground">Suggest Re-Purchase</div>
-                  <div className="text-xs text-muted-foreground">Based on history</div>
+                  <div className="font-medium text-sm text-gray-900 dark:text-white">Suggest Re-Purchase</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">Based on history</div>
                 </div>
               </div>
-              <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-4 w-4 text-gray-400 dark:text-gray-500 group-hover:translate-x-1 transition-transform" />
             </Button>
 
             <Button
@@ -98,20 +98,20 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
               disabled={!isLoaded || isLoading}
               variant="outline"
               className={cn(
-                "w-full justify-between h-auto py-4 px-4 bg-white/50 dark:bg-black/20 border-white/20 hover:bg-white/80 transition-all group",
-                activeAction === 'healthier' && "border-green-500/50 bg-green-500/5"
+                "w-full justify-between h-auto py-3 px-4 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all group",
+                activeAction === 'healthier' && "border-green-500 bg-green-50 dark:bg-green-950/20"
               )}
             >
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
+                <div className="p-1.5 rounded-md bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
                   <Wheat className="h-4 w-4" />
                 </div>
                 <div className="text-left">
-                  <div className="font-semibold text-foreground">Healthier Options</div>
-                  <div className="text-xs text-muted-foreground">Better alternatives</div>
+                  <div className="font-medium text-sm text-gray-900 dark:text-white">Healthier Options</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">Better alternatives</div>
                 </div>
               </div>
-              <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-4 w-4 text-gray-400 dark:text-gray-500 group-hover:translate-x-1 transition-transform" />
             </Button>
 
             <Button
@@ -119,35 +119,35 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
               disabled={!isLoaded || isLoading}
               variant="outline"
               className={cn(
-                "w-full justify-between h-auto py-4 px-4 bg-white/50 dark:bg-black/20 border-white/20 hover:bg-white/80 transition-all group",
-                activeAction === 'expiry' && "border-red-500/50 bg-red-500/5"
+                "w-full justify-between h-auto py-3 px-4 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all group",
+                activeAction === 'expiry' && "border-red-500 bg-red-50 dark:bg-red-950/20"
               )}
             >
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400">
+                <div className="p-1.5 rounded-md bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400">
                   <AlertTriangle className="h-4 w-4" />
                 </div>
                 <div className="text-left">
-                  <div className="font-semibold text-foreground">Check Expiry</div>
-                  <div className="text-xs text-muted-foreground">Avoid waste</div>
+                  <div className="font-medium text-sm text-gray-900 dark:text-white">Check Expiry</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">Avoid waste</div>
                 </div>
               </div>
-              <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-4 w-4 text-gray-400 dark:text-gray-500 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
         </CardContent>
       </Card>
 
-      <Card className="glass-card border-0 min-h-[280px]">
+      <Card className="border-gray-200 dark:border-gray-800 min-h-[280px]">
         <CardHeader className="pb-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10">
+            <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-950/50">
               {icon}
             </div>
             <div className="flex-1">
-              <CardTitle className="font-heading text-lg">{title}</CardTitle>
+              <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">{title}</CardTitle>
               {suggestions.length > 0 && !isLoading && (
-                <Badge variant="secondary" className="mt-1.5 text-xs">
+                <Badge variant="secondary" className="mt-1.5 text-xs bg-blue-100 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300">
                   {suggestions.length} {suggestions.length === 1 ? 'suggestion' : 'suggestions'}
                 </Badge>
               )}
@@ -157,28 +157,27 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
         <CardContent className="pt-0">
           {isLoading ? (
             <div className="flex flex-col justify-center items-center py-12 space-y-3">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" />
-              <p className="text-sm text-muted-foreground">Analyzing your data...</p>
+              <Loader2 className="h-8 w-8 animate-spin text-blue-600 dark:text-blue-400" />
+              <p className="text-sm text-gray-600 dark:text-gray-400">Analyzing your data...</p>
             </div>
           ) : (
             suggestions.length > 0 ? (
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {suggestions.map((suggestion, index) => (
                   <div
                     key={index}
-                    className="p-4 rounded-lg border border-white/10 bg-white/40 dark:bg-black/20 hover:bg-white/60 transition-colors animate-fade-in"
-                    style={{ animationDelay: `${index * 100}ms` }}
+                    className="p-3.5 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
                   >
-                    <p className="text-sm text-foreground leading-relaxed">{suggestion}</p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{suggestion}</p>
                   </div>
                 ))}
               </div>
             ) : (
               <div className="flex flex-col justify-center items-center py-12 space-y-3">
-                <Lightbulb className="h-10 w-10 text-muted-foreground/30" />
+                <Lightbulb className="h-10 w-10 text-gray-300 dark:text-gray-700" />
                 <div className="text-center space-y-1">
-                  <p className="text-sm font-medium text-foreground">No suggestions yet</p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">No suggestions yet</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
                     Click a button above to get personalized suggestions
                   </p>
                 </div>

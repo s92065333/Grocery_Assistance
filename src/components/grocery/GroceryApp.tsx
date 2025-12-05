@@ -16,32 +16,32 @@ export default function GroceryApp() {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
-    <div className="flex flex-col gap-8 pb-20">
-      {/* Dashboard Header / Stats Zone */}
-      <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 animate-fade-in">
+    <div className="flex flex-col gap-8 pb-8">
+      {/* Dashboard Header */}
+      <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-gray-200 dark:border-gray-800">
         <div>
-          <h2 className="text-3xl font-bold font-heading text-foreground tracking-tight">
-            Good Evening, <span className="text-gradient">Shopper</span>
-          </h2>
-          <p className="text-muted-foreground mt-1">
-            You have <span className="font-bold text-primary">{groceryList.length} items</span> in your list.
+          <h1 className="text-3xl font-bold font-heading text-gray-900 dark:text-white tracking-tight">
+            Dashboard
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1.5">
+            You have <span className="font-semibold text-blue-600 dark:text-blue-400">{groceryList.length} items</span> in your grocery list
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="w-full md:w-[300px]">
+          <div className="w-full md:w-[320px]">
             <QuickAddBar onAddItem={addItem} disabled={!isLoaded} />
           </div>
 
           <Sheet open={isChatOpen} onOpenChange={setIsChatOpen}>
             <SheetTrigger asChild>
-              <Button className="rounded-full h-12 px-6 bg-gradient-to-r from-primary to-accent hover:opacity-90 shadow-lg shadow-primary/20 transition-all">
+              <Button className="h-11 px-5 bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow-md transition-all">
                 <Sparkles className="mr-2 h-4 w-4" />
                 Ask AI
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-full sm:w-[500px] p-0 border-l border-white/10 bg-black/20 backdrop-blur-2xl">
-              <div className="h-full pt-10">
+            <SheetContent side="right" className="w-full sm:w-[500px] p-0 border-l border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+              <div className="h-full">
                 <ChatInterface
                   groceryList={groceryList}
                   purchaseHistory={purchaseHistory}
@@ -55,16 +55,15 @@ export default function GroceryApp() {
       </header>
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 animate-fade-in" style={{ animationDelay: '100ms' }}>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
         {/* Left Column: Grocery Grid */}
-        <div className="lg:col-span-8 space-y-6">
+        <div className="lg:col-span-8 space-y-5">
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-bold font-heading flex items-center gap-2">
-              <LayoutGrid className="h-5 w-5 text-primary" />
-              Your Essentials
-            </h3>
-            {/* View Toggle could go here */}
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+              <LayoutGrid className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              Your Grocery List
+            </h2>
           </div>
 
           <GroceryGrid
@@ -78,10 +77,10 @@ export default function GroceryApp() {
         {/* Right Column: Suggestions & Quick Actions */}
         <div className="lg:col-span-4 space-y-6">
           <div className="sticky top-6">
-            <h3 className="text-xl font-bold font-heading flex items-center gap-2 mb-6">
-              <Sparkles className="h-5 w-5 text-accent" />
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2 mb-5">
+              <Sparkles className="h-5 w-5 text-blue-600 dark:text-blue-400" />
               Smart Suggestions
-            </h3>
+            </h2>
             <ActionPanel
               groceryList={groceryList.map(item => item.name)}
               purchaseHistory={purchaseHistory}
