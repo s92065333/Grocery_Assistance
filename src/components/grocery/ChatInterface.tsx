@@ -5,11 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Send, Bot, User, Loader2 } from 'lucide-react';
+import { Send, Bot, User, Loader2, Sparkles } from 'lucide-react';
 import { processChatCommand } from '@/ai/flows/process-chat-command';
 import { getAllRuleBasedSuggestions } from '@/lib/rules-engine';
 import type { GroceryItem, PurchaseHistoryItem } from '@/lib/types';
 import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 
 interface Message {
   id: string;
@@ -63,7 +64,7 @@ export function ChatInterface({ groceryList, purchaseHistory, onAddItem, onRemov
     try {
       // First, check rule-based suggestions
       const ruleBasedSuggestions = getAllRuleBasedSuggestions(purchaseHistory, groceryList);
-      
+
       // Process the command with AI
       const groceryListNames = groceryList.map(item => item.name);
       const historyForAI = purchaseHistory.map(item => ({
@@ -95,7 +96,7 @@ export function ChatInterface({ groceryList, purchaseHistory, onAddItem, onRemov
           description: `Added ${result.items.join(', ')} to your grocery list.`,
         });
       } else if (result.intent === 'remove' && result.items.length > 0) {
-        const itemToRemove = groceryList.find((item: GroceryItem) => 
+        const itemToRemove = groceryList.find((item: GroceryItem) =>
           result.items.some((rm: string) => item.name.toLowerCase().includes(rm.toLowerCase()))
         );
         if (itemToRemove) {
@@ -160,72 +161,86 @@ export function ChatInterface({ groceryList, purchaseHistory, onAddItem, onRemov
   };
 
   return (
-    <Card className="h-[calc(100vh-12rem)] flex flex-col shadow-sm">
-      <CardHeader className="pb-4">
-        <CardTitle className="font-headline flex items-center gap-2 text-xl">
-          <Bot className="h-5 w-5" />
+    <Card className="glass-card border-0 h-[calc(100vh-12rem)] flex flex-col shadow-xl overflow-hidden">
+      <CardHeader className="pb-4 border-b border-white/10 bg-white/40 dark:bg-black/20 backdrop-blur-md">
+        <CardTitle className="font-heading flex items-center gap-2 text-xl">
+          <div className="p-2 rounded-lg bg-primary/10">
+            <Sparkles className="h-5 w-5 text-primary" />
+          </div>
           AI Assistant
         </CardTitle>
-        <CardDescription className="mt-1">Chat with your grocery shopping assistant</CardDescription>
+        <CardDescription className="mt-1 ml-11">Chat with your grocery shopping assistant</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col flex-1 min-h-0 px-6 pb-6">
-        <ScrollArea className="flex-1 pr-4 mb-4" ref={scrollRef}>
-          <div className="space-y-4 py-2">
+      <CardContent className="flex flex-col flex-1 min-h-0 p-0">
+        <ScrollArea className="flex-1 p-6" ref={scrollRef}>
+          <div className="space-y-6">
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}
               >
                 {message.role === 'assistant' && (
-                  <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Bot className="h-4 w-4 text-primary" />
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md mt-1">
+                    <Bot className="h-4 w-4 text-white" />
                   </div>
                 )}
                 <div
-                  className={`max-w-[85%] rounded-lg p-4 ${
+                  className={cn(
+                    "max-w-[85%] rounded-2xl p-4 shadow-sm",
                     message.role === 'user'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted'
-                  }`}
+                      ? "bg-primary text-primary-foreground rounded-tr-sm"
+                      : "bg-white dark:bg-card border border-white/20 text-foreground rounded-tl-sm"
+                  )}
                 >
                   <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
                   {message.reasoning && (
-                    <p className="text-xs mt-3 pt-3 border-t border-border/50 opacity-75 italic">
-                      Reasoning: {message.reasoning}
-                    </p>
+                    <div className="mt-3 pt-3 border-t border-border/10">
+                      <p className="text-xs opacity-70 italic flex items-center gap-1">
+                        <Sparkles className="h-3 w-3" />
+                        Reasoning: {message.reasoning}
+                      </p>
+                    </div>
                   )}
                 </div>
                 {message.role === 'user' && (
-                  <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-                    <User className="h-4 w-4 text-primary" />
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-muted flex items-center justify-center mt-1">
+                    <User className="h-4 w-4 text-muted-foreground" />
                   </div>
                 )}
               </div>
             ))}
             {isLoading && (
-              <div className="flex gap-3 justify-start">
-                <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Bot className="h-4 w-4 text-primary" />
+              <div className="flex gap-3 justify-start animate-fade-in">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md">
+                  <Bot className="h-4 w-4 text-white" />
                 </div>
-                <div className="bg-muted rounded-lg p-4">
-                  <Loader2 className="h-4 w-4 animate-spin" />
+                <div className="bg-white dark:bg-card border border-white/20 rounded-2xl rounded-tl-sm p-4 shadow-sm flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin text-primary" />
+                  <span className="text-sm text-muted-foreground">Thinking...</span>
                 </div>
               </div>
             )}
           </div>
         </ScrollArea>
-        <div className="flex gap-3 pt-4 border-t">
-          <Input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Type your message... (e.g., 'Add 2kg rice', 'What should I buy?')"
-            disabled={isLoading}
-            className="flex-1"
-          />
-          <Button onClick={handleSend} disabled={isLoading || !input.trim()} size="default">
-            <Send className="h-4 w-4" />
-          </Button>
+        <div className="p-4 border-t border-white/10 bg-white/40 dark:bg-black/20 backdrop-blur-md">
+          <div className="flex gap-3 relative">
+            <Input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Type your message... (e.g., 'Add 2kg rice', 'What should I buy?')"
+              disabled={isLoading}
+              className="flex-1 pl-4 pr-12 h-12 rounded-full bg-white/80 dark:bg-black/40 border-white/20 focus:ring-2 focus:ring-primary/20 transition-all shadow-sm"
+            />
+            <Button
+              onClick={handleSend}
+              disabled={isLoading || !input.trim()}
+              size="icon"
+              className="absolute right-1 top-1 h-10 w-10 rounded-full shadow-md hover:shadow-lg transition-all"
+            >
+              <Send className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>

@@ -6,7 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import type { PurchaseHistoryItem } from '@/lib/types';
 import { getRepurchaseSuggestions, getHealthierAlternatives, getExpiryReminders } from '@/lib/actions';
-import { Lightbulb, Recycle, Wheat, AlertTriangle, Loader2, Sparkles } from 'lucide-react';
+import { Lightbulb, Recycle, Wheat, AlertTriangle, Loader2, Sparkles, ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface ActionPanelProps {
   groceryList: string[];
@@ -25,12 +26,12 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
 
   const handleAction = async (actionType: ActionType) => {
     if (!actionType) return;
-    
+
     setIsLoading(true);
     setSuggestions([]);
     setActiveAction(actionType);
     let results: string[] = [];
-    
+
     try {
       if (actionType === 're-purchase') {
         setTitle('Re-Purchase Suggestions');
@@ -45,7 +46,7 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
         setIcon(<AlertTriangle className="h-5 w-5 text-destructive" />);
         results = await getExpiryReminders(purchaseHistory);
       }
-      
+
       setSuggestions(results);
     } catch (error) {
       console.error('Error fetching suggestions:', error);
@@ -57,57 +58,94 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
 
   return (
     <div className="space-y-6">
-      <Card>
+      <Card className="glass-card border-0 bg-gradient-to-br from-primary/5 to-accent/5">
         <CardHeader className="pb-4">
           <div className="flex items-center gap-2 mb-1">
-            <Sparkles className="h-5 w-5 text-primary" />
-            <CardTitle className="font-headline text-lg">AI Assistant</CardTitle>
+            <div className="p-2 rounded-lg bg-primary/10">
+              <Sparkles className="h-5 w-5 text-primary" />
+            </div>
+            <CardTitle className="font-heading text-lg">AI Assistant</CardTitle>
           </div>
           <CardDescription className="text-sm">
             Get smart suggestions for your groceries based on your purchase history and preferences.
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-0">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <Button 
-              onClick={() => handleAction('re-purchase')} 
-              disabled={!isLoaded || isLoading}
-              variant="default"
-              className="w-full h-auto py-3 px-4 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left"
-            >
-              <Recycle className="h-5 w-5 flex-shrink-0" />
-              <span className="text-sm font-medium whitespace-normal break-words">Suggest Re-Purchase</span>
-            </Button>
-            <Button 
-              onClick={() => handleAction('healthier')} 
+          <div className="grid grid-cols-1 gap-3">
+            <Button
+              onClick={() => handleAction('re-purchase')}
               disabled={!isLoaded || isLoading}
               variant="outline"
-              className="w-full h-auto py-3 px-4 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left"
+              className={cn(
+                "w-full justify-between h-auto py-4 px-4 bg-white/50 dark:bg-black/20 border-white/20 hover:bg-white/80 transition-all group",
+                activeAction === 're-purchase' && "border-primary/50 bg-primary/5"
+              )}
             >
-              <Wheat className="h-5 w-5 flex-shrink-0" />
-              <span className="text-sm font-medium whitespace-normal break-words">Healthier Options</span>
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                  <Recycle className="h-4 w-4" />
+                </div>
+                <div className="text-left">
+                  <div className="font-semibold text-foreground">Suggest Re-Purchase</div>
+                  <div className="text-xs text-muted-foreground">Based on history</div>
+                </div>
+              </div>
+              <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button 
-              onClick={() => handleAction('expiry')} 
+
+            <Button
+              onClick={() => handleAction('healthier')}
               disabled={!isLoaded || isLoading}
-              variant="destructive"
-              className="w-full h-auto py-3 px-4 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left"
+              variant="outline"
+              className={cn(
+                "w-full justify-between h-auto py-4 px-4 bg-white/50 dark:bg-black/20 border-white/20 hover:bg-white/80 transition-all group",
+                activeAction === 'healthier' && "border-green-500/50 bg-green-500/5"
+              )}
             >
-              <AlertTriangle className="h-5 w-5 flex-shrink-0" />
-              <span className="text-sm font-medium whitespace-normal break-words">Check Expiry</span>
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
+                  <Wheat className="h-4 w-4" />
+                </div>
+                <div className="text-left">
+                  <div className="font-semibold text-foreground">Healthier Options</div>
+                  <div className="text-xs text-muted-foreground">Better alternatives</div>
+                </div>
+              </div>
+              <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+            </Button>
+
+            <Button
+              onClick={() => handleAction('expiry')}
+              disabled={!isLoaded || isLoading}
+              variant="outline"
+              className={cn(
+                "w-full justify-between h-auto py-4 px-4 bg-white/50 dark:bg-black/20 border-white/20 hover:bg-white/80 transition-all group",
+                activeAction === 'expiry' && "border-red-500/50 bg-red-500/5"
+              )}
+            >
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400">
+                  <AlertTriangle className="h-4 w-4" />
+                </div>
+                <div className="text-left">
+                  <div className="font-semibold text-foreground">Check Expiry</div>
+                  <div className="text-xs text-muted-foreground">Avoid waste</div>
+                </div>
+              </div>
+              <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
         </CardContent>
       </Card>
 
-      <Card className="min-h-[280px]">
+      <Card className="glass-card border-0 min-h-[280px]">
         <CardHeader className="pb-4">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-lg bg-primary/10">
               {icon}
             </div>
             <div className="flex-1">
-              <CardTitle className="font-headline text-lg">{title}</CardTitle>
+              <CardTitle className="font-heading text-lg">{title}</CardTitle>
               {suggestions.length > 0 && !isLoading && (
                 <Badge variant="secondary" className="mt-1.5 text-xs">
                   {suggestions.length} {suggestions.length === 1 ? 'suggestion' : 'suggestions'}
@@ -118,8 +156,8 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
         </CardHeader>
         <CardContent className="pt-0">
           {isLoading ? (
-            <div className="flex flex-col justify-center items-center py-16 space-y-3">
-              <Loader2 className="h-10 w-10 animate-spin text-primary" />
+            <div className="flex flex-col justify-center items-center py-12 space-y-3">
+              <Loader2 className="h-8 w-8 animate-spin text-primary" />
               <p className="text-sm text-muted-foreground">Analyzing your data...</p>
             </div>
           ) : (
@@ -128,15 +166,16 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
                 {suggestions.map((suggestion, index) => (
                   <div
                     key={index}
-                    className="p-4 rounded-lg border bg-card hover:bg-muted/50 transition-colors"
+                    className="p-4 rounded-lg border border-white/10 bg-white/40 dark:bg-black/20 hover:bg-white/60 transition-colors animate-fade-in"
+                    style={{ animationDelay: `${index * 100}ms` }}
                   >
                     <p className="text-sm text-foreground leading-relaxed">{suggestion}</p>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col justify-center items-center py-16 space-y-3">
-                <Lightbulb className="h-12 w-12 text-muted-foreground/50" />
+              <div className="flex flex-col justify-center items-center py-12 space-y-3">
+                <Lightbulb className="h-10 w-10 text-muted-foreground/30" />
                 <div className="text-center space-y-1">
                   <p className="text-sm font-medium text-foreground">No suggestions yet</p>
                   <p className="text-xs text-muted-foreground">
