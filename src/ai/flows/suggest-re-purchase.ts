@@ -16,6 +16,10 @@ const SuggestRePurchaseInputSchema = z.object({
     z.object({
       itemName: z.string().describe('The name of the item.'),
       purchaseDate: z.string().describe('The date the item was purchased.'),
+      deleted: z.boolean().optional(),
+      isDeleted: z.boolean().optional(),
+      consumed: z.boolean().optional(),
+      isConsumed: z.boolean().optional(),
     })
   ).describe('The user purchase history.'),
   currentGroceryList: z.array(z.string()).describe('The current grocery list.'),
@@ -62,7 +66,13 @@ const suggestRePurchaseFlow = ai.defineFlow(
     outputSchema: SuggestRePurchaseOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
+    const filteredHistory = input.purchaseHistory.filter(
+      item => !item.deleted && !item.isDeleted && !item.consumed && !item.isConsumed
+    );
+    const {output} = await prompt({
+      ...input,
+      purchaseHistory: filteredHistory,
+    });
     return output!;
   }
 );

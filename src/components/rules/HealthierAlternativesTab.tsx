@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -38,55 +38,31 @@ interface HealthierAlternativesTabProps {
 }
 
 export function HealthierAlternativesTab({ onRefresh }: HealthierAlternativesTabProps) {
-  // Get both default rules and user-customized rules
-  const defaultRules = getAllDefaultHealthierAlternatives();
-  const storedRules = loadRules().healthierAlternatives;
-  
-  // Create a map to track which rules are user-customized (have IDs)
-  const customRuleMap = new Map(storedRules.map(rule => [rule.unhealthyItem.toLowerCase(), rule]));
-  
-  // Merge: default rules + user customizations (user rules override defaults)
-  const allRules = defaultRules.map(defaultRule => {
-    const customRule = customRuleMap.get(defaultRule.unhealthyItem.toLowerCase());
-    if (customRule) {
-      return customRule; // Use custom rule if exists
-    }
-    // Create a temporary ID for default rules (they're not editable/deletable in UI)
-    return {
-      id: `default-${defaultRule.unhealthyItem.toLowerCase().replace(/\s+/g, '-')}`,
-      unhealthyItem: defaultRule.unhealthyItem,
-      healthyAlternative: defaultRule.healthyAlternative,
-      isDefault: true,
-    };
-  });
-  
-  // Add any custom rules that aren't in defaults
-  storedRules.forEach(customRule => {
-    const exists = defaultRules.some(dr => 
-      dr.unhealthyItem.toLowerCase() === customRule.unhealthyItem.toLowerCase()
-    );
-    if (!exists) {
-      allRules.push(customRule);
-    }
-  });
-  
-  const [rules, setRules] = useState(allRules);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [editingRule, setEditingRule] = useState<{ id: string; unhealthyItem: string; healthyAlternative: string; isDefault?: boolean } | null>(null);
-  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
-  const [formData, setFormData] = useState({ unhealthyItem: '', healthyAlternative: '' });
-  const { toast } = useToast();
+  // State for hydration safe rendering
+  const [rules, setRules] = useState<any[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const refreshRules = () => {
+  // Initialize data on client side only to match server SSR
+  useEffect(() => {
+    refreshRules(false);
+    setIsLoaded(true);
+  }, []);
+
+  // We can just define refreshRules here or move logic
+  const refreshRules = (notifyParent = true) => {
     const defaultRules = getAllDefaultHealthierAlternatives();
     const storedRules = loadRules().healthierAlternatives;
+
+    // Create a map to track which rules are user-customized (have IDs)
     const customRuleMap = new Map(storedRules.map(rule => [rule.unhealthyItem.toLowerCase(), rule]));
-    
-    const merged = defaultRules.map(defaultRule => {
+
+    // Merge: default rules + user customizations (user rules override defaults)
+    const allRules: any[] = defaultRules.map(defaultRule => {
       const customRule = customRuleMap.get(defaultRule.unhealthyItem.toLowerCase());
       if (customRule) {
-        return customRule;
+        return customRule; // Use custom rule if exists
       }
+      // Create a temporary ID for default rules (they're not editable/deletable in UI)
       return {
         id: `default-${defaultRule.unhealthyItem.toLowerCase().replace(/\s+/g, '-')}`,
         unhealthyItem: defaultRule.unhealthyItem,
@@ -94,19 +70,29 @@ export function HealthierAlternativesTab({ onRefresh }: HealthierAlternativesTab
         isDefault: true,
       };
     });
-    
+
+    // Add any custom rules that aren't in defaults
     storedRules.forEach(customRule => {
-      const exists = defaultRules.some(dr => 
+      const exists = defaultRules.some(dr =>
         dr.unhealthyItem.toLowerCase() === customRule.unhealthyItem.toLowerCase()
       );
       if (!exists) {
-        merged.push(customRule);
+        allRules.push(customRule);
       }
     });
-    
-    setRules(merged);
-    onRefresh();
+
+    setRules(allRules);
+    if (notifyParent) {
+      onRefresh();
+    }
   };
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [editingRule, setEditingRule] = useState<{ id: string; unhealthyItem: string; healthyAlternative: string; isDefault?: boolean } | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
+  const [formData, setFormData] = useState({ unhealthyItem: '', healthyAlternative: '' });
+  const { toast } = useToast();
+
+
 
   const handleOpenDialog = (rule?: typeof editingRule) => {
     if (rule) {
@@ -136,10 +122,10 @@ export function HealthierAlternativesTab({ onRefresh }: HealthierAlternativesTab
         if ((editingRule as any).isDefault) {
           // Check if a custom rule already exists for this item
           const currentStoredRules = loadRules().healthierAlternatives;
-          const existingCustomRule = currentStoredRules.find(r => 
+          const existingCustomRule = currentStoredRules.find(r =>
             r.unhealthyItem.toLowerCase() === formData.unhealthyItem.toLowerCase()
           );
-          
+
           if (existingCustomRule) {
             // Update existing custom rule
             updateHealthierAlternative(existingCustomRule.id, formData);
@@ -172,7 +158,7 @@ export function HealthierAlternativesTab({ onRefresh }: HealthierAlternativesTab
 
   const handleDelete = (id: string) => {
     const rule = rules.find(r => r.id === id);
-    
+
     // If it's a default rule, we can't delete it (it's a system default)
     // But we can create a custom rule with the same unhealthy item to "hide" it
     if (rule && (rule as any).isDefault) {
@@ -184,7 +170,7 @@ export function HealthierAlternativesTab({ onRefresh }: HealthierAlternativesTab
       setDeleteTarget(null);
       return;
     }
-    
+
     try {
       deleteHealthierAlternative(id);
       toast({ title: 'Rule deleted', description: 'Healthier alternative rule has been deleted.' });
@@ -217,7 +203,11 @@ export function HealthierAlternativesTab({ onRefresh }: HealthierAlternativesTab
           </div>
         </CardHeader>
         <CardContent className="pt-0">
-          {rules.length === 0 ? (
+          {!isLoaded ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">Loading rules...</p>
+            </div>
+          ) : rules.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-muted-foreground">No rules defined. Add your first rule to get started.</p>
             </div>

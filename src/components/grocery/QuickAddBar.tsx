@@ -44,7 +44,9 @@ export function QuickAddBar({ onAddItem, disabled }: QuickAddBarProps) {
             }
         }
 
-        onAddItem(name, quantity, unit);
+        if (typeof onAddItem === 'function') {
+            onAddItem(name, quantity, unit);
+        }
         form.reset();
     }
 

@@ -84,9 +84,9 @@ export function useGroceryData() {
   }, [purchaseHistory, isLoaded]);
 
   const addItem = useCallback((
-    itemName: string, 
-    quantity?: number, 
-    unit?: string, 
+    itemName: string,
+    quantity?: number,
+    unit?: string,
     category?: string,
     expiryDate?: string
   ) => {
@@ -95,7 +95,7 @@ export function useGroceryData() {
 
     // Check if item already exists
     setGroceryList(prev => {
-      const existingItem = prev.find(item => 
+      const existingItem = prev.find(item =>
         item.name.toLowerCase() === trimmedName.toLowerCase()
       );
       if (existingItem) return prev;
@@ -117,7 +117,7 @@ export function useGroceryData() {
       const existingItemIndex = prev.findIndex(
         item => item.itemName.toLowerCase() === trimmedName.toLowerCase()
       );
-      
+
       const historyItem: PurchaseHistoryItem = {
         id: existingItemIndex > -1 ? prev[existingItemIndex].id : crypto.randomUUID(),
         itemName: trimmedName,
@@ -137,15 +137,115 @@ export function useGroceryData() {
   }, []);
 
   const removeItem = useCallback((itemId: string) => {
-    setGroceryList(prev => prev.filter(item => item.id !== itemId));
+    setGroceryList(prev => {
+      const itemToRemove = prev.find(item => item.id === itemId);
+      if (itemToRemove) {
+        // Also remove from purchase history to prevent phantom reminders
+        setPurchaseHistory(history =>
+          history.filter(h => h.itemName.toLowerCase() !== itemToRemove.name.toLowerCase())
+        );
+      }
+      return prev.filter(item => item.id !== itemId);
+    });
   }, []);
 
   const editItem = useCallback((item: GroceryItem) => {
-    setGroceryList(prev => 
-      prev.map(existingItem => 
+    setGroceryList(prev =>
+      prev.map(existingItem =>
         existingItem.id === item.id ? item : existingItem
       )
     );
+
+    // Update purchase history if name or expiry changed
+    setPurchaseHistory(prev => {
+      const existingHistoryItem = prev.find(h => h.itemName.toLowerCase() === item.name.toLowerCase());
+
+      if (existingHistoryItem) {
+        return prev.map(h => {
+          if (h.itemName.toLowerCase() === item.name.toLowerCase()) {
+            return {
+              ...h,
+              expiryDate: item.expiryDate,
+              // If expiry date is set, update expiryTimeInDays based on it
+              expiryTimeInDays: item.expiryDate
+                ? Math.ceil((new Date(item.expiryDate).getTime() - new Date(h.purchaseDate).getTime()) / (1000 * 60 * 60 * 24))
+                : h.expiryTimeInDays
+            };
+          }
+          return h;
+        });
+      }
+      return prev;
+    });
+  }, []);
+
+  const injectMockData = useCallback(() => {
+    const now = new Date();
+    const mockHistory: PurchaseHistoryItem[] = [
+      // 1. Recent Purchase (Timing Rule: 3-21 days)
+      // Milk: Bought 4 days ago. (User Example)
+      {
+        id: crypto.randomUUID(),
+        itemName: 'Fresh Milk',
+        purchaseDate: new Date(now.getTime() - 4 * 24 * 60 * 60 * 1000).toISOString(),
+        expiryTimeInDays: 7,
+        quantity: 1,
+        expiryDate: new Date(now.getTime() + 3 * 24 * 60 * 60 * 1000).toISOString(),
+      },
+      // 2. Frequency Rule (2 times in 60 days)
+      // Bread: Bought 5 days ago & 35 days ago (User Example)
+      {
+        id: crypto.randomUUID(),
+        itemName: 'Bread',
+        purchaseDate: new Date(now.getTime() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+        expiryTimeInDays: 5,
+        quantity: 1,
+      },
+      {
+        id: crypto.randomUUID(),
+        itemName: 'Bread',
+        purchaseDate: new Date(now.getTime() - 35 * 24 * 60 * 60 * 1000).toISOString(),
+        expiryTimeInDays: 5,
+        quantity: 1,
+      },
+      // 3. Contextual Items (Sri Lankan staples from rules-engine.ts)
+      // Samba Rice: Bought 18 days ago (Fits 3-21 day window)
+      {
+        id: crypto.randomUUID(),
+        itemName: 'Samba Rice',
+        purchaseDate: new Date(now.getTime() - 18 * 24 * 60 * 60 * 1000).toISOString(),
+        expiryTimeInDays: 30,
+        quantity: 5,
+        cost: 1250,
+      },
+      // Dhal: Bought 7 days ago
+      {
+        id: crypto.randomUUID(),
+        itemName: 'Red Dhal',
+        purchaseDate: new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+        expiryTimeInDays: 60,
+        quantity: 1,
+      },
+      // Coconut Milk: Bought 2 days ago (Too recent for re-purchase, checking negative case)
+      {
+        id: crypto.randomUUID(),
+        itemName: 'Coconut Milk',
+        purchaseDate: new Date(now.getTime() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+        expiryTimeInDays: 7,
+        quantity: 2,
+      },
+      // 3. Expiry Rule Support
+      // Yogurt: Bought 15 days ago, Expiry 14 days initially (Expired yesterday)
+      {
+        id: crypto.randomUUID(),
+        itemName: 'Curd',
+        purchaseDate: new Date(now.getTime() - 15 * 24 * 60 * 60 * 1000).toISOString(),
+        expiryTimeInDays: 14,
+        quantity: 1,
+      }
+    ];
+
+    setPurchaseHistory(prev => [...prev, ...mockHistory]);
   }, []);
 
   return {
@@ -155,5 +255,6 @@ export function useGroceryData() {
     addItem,
     removeItem,
     editItem,
+    injectMockData,
   };
 }

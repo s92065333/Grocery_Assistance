@@ -6,13 +6,14 @@ import { QuickAddBar } from './QuickAddBar';
 import { GroceryGrid } from './GroceryGrid';
 import { ActionPanel } from './ActionPanel';
 import { ChatInterface } from './ChatInterface';
+import { AddItemDialog } from './AddItemDialog';
 import { Button } from '@/components/ui/button';
 import { MessageSquare, X, Sparkles, LayoutGrid, List as ListIcon } from 'lucide-react';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
 export default function GroceryApp() {
-  const { groceryList, purchaseHistory, isLoaded, addItem, removeItem, editItem } = useGroceryData();
+  const { groceryList, purchaseHistory, isLoaded, addItem, removeItem, editItem, injectMockData } = useGroceryData();
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
@@ -29,9 +30,11 @@ export default function GroceryApp() {
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="w-full md:w-[320px]">
+          <div className="flex-1 md:w-[320px] md:flex-none">
             <QuickAddBar onAddItem={addItem} disabled={!isLoaded} />
           </div>
+
+          <AddItemDialog onAddItem={addItem} disabled={!isLoaded} />
 
           <Sheet open={isChatOpen} onOpenChange={setIsChatOpen}>
             <SheetTrigger asChild>
@@ -41,6 +44,7 @@ export default function GroceryApp() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-full sm:w-[500px] p-0 border-l border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+              <SheetTitle className="sr-only">AI Assistant</SheetTitle>
               <div className="h-full">
                 <ChatInterface
                   groceryList={groceryList}
@@ -81,6 +85,17 @@ export default function GroceryApp() {
               <Sparkles className="h-5 w-5 text-blue-600 dark:text-blue-400" />
               Smart Suggestions
             </h2>
+            <div className="mb-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={injectMockData}
+                className="w-full text-xs text-gray-500 hover:text-blue-600 border-dashed"
+              >
+                <Sparkles className="mr-2 h-3 w-3" />
+                Reading Purchase History
+              </Button>
+            </div>
             <ActionPanel
               groceryList={groceryList.map(item => item.name)}
               purchaseHistory={purchaseHistory}

@@ -83,13 +83,15 @@ export function ChatInterface({ groceryList, purchaseHistory, onAddItem, onRemov
       if (result.intent === 'add' && result.items.length > 0) {
         result.items.forEach((itemName: string) => {
           const quantity = result.quantities?.find((q: { item: string; quantity?: number; unit?: string }) => q.item.toLowerCase() === itemName.toLowerCase());
-          onAddItem(
-            itemName,
-            quantity?.quantity,
-            quantity?.unit,
-            undefined,
-            undefined
-          );
+          if (typeof onAddItem === 'function') {
+            onAddItem(
+              itemName,
+              quantity?.quantity,
+              quantity?.unit,
+              undefined,
+              undefined
+            );
+          }
         });
         toast({
           title: 'Items added',
@@ -246,4 +248,3 @@ export function ChatInterface({ groceryList, purchaseHistory, onAddItem, onRemov
     </div>
   );
 }
-

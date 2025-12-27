@@ -38,13 +38,15 @@ export function AddItemForm({ onAddItem, disabled }: AddItemFormProps) {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    onAddItem(
-      values.itemName,
-      values.quantity ? Number(values.quantity) : undefined,
-      values.unit || undefined,
-      values.category || undefined,
-      values.expiryDate || undefined
-    );
+    if (typeof onAddItem === 'function') {
+      onAddItem(
+        values.itemName,
+        values.quantity ? Number(values.quantity) : undefined,
+        values.unit || undefined,
+        values.category || undefined,
+        values.expiryDate || undefined
+      );
+    }
     form.reset();
   }
 

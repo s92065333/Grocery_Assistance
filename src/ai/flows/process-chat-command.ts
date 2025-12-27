@@ -15,6 +15,10 @@ const ProcessChatCommandInputSchema = z.object({
       itemName: z.string(),
       purchaseDate: z.string(),
       expiryTimeInDays: z.number().optional(),
+      deleted: z.boolean().optional(),
+      isDeleted: z.boolean().optional(),
+      consumed: z.boolean().optional(),
+      isConsumed: z.boolean().optional(),
     })
   ).describe('User\'s purchase history.'),
 });
@@ -80,8 +84,13 @@ const processChatCommandFlow = ai.defineFlow(
     outputSchema: ProcessChatCommandOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
+    const filteredHistory = input.purchaseHistory.filter(
+      item => !item.deleted && !item.isDeleted && !item.consumed && !item.isConsumed
+    );
+    const {output} = await prompt({
+      ...input,
+      purchaseHistory: filteredHistory,
+    });
     return output!;
   }
 );
-

@@ -13,7 +13,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'maida': 'whole wheat flour',
   'pasta': 'whole wheat pasta',
   'noodles': 'whole wheat noodles',
-  
+
   // Dairy products
   'full cream milk': 'low-fat milk',
   'whole milk': 'low-fat milk',
@@ -22,7 +22,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'butter': 'olive oil',
   'ghee': 'coconut oil',
   'margarine': 'olive oil',
-  
+
   // Beverages
   'soda': 'sparkling water',
   'cola': 'sparkling water',
@@ -31,7 +31,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'energy drinks': 'coconut water',
   'sweetened tea': 'unsweetened tea',
   'sweetened coffee': 'unsweetened coffee',
-  
+
   // Sweeteners and condiments
   'sugar': 'honey',
   'white sugar': 'jaggery',
@@ -39,7 +39,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'mayonnaise': 'greek yogurt',
   'sour cream': 'greek yogurt',
   'cream cheese': 'cottage cheese',
-  
+
   // Snacks and desserts
   'potato chips': 'baked chips',
   'fried snacks': 'roasted nuts',
@@ -48,13 +48,13 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'chocolates': 'dark chocolate',
   'cookies': 'oatmeal cookies',
   'biscuits': 'whole grain crackers',
-  
+
   // Oils and fats
   'vegetable oil': 'coconut oil',
   'sunflower oil': 'coconut oil',
   'palm oil': 'coconut oil',
   'refined oil': 'virgin coconut oil',
-  
+
   // Sri Lankan specific healthier alternatives
   'white parboiled rice': 'red rice',
   'polished rice': 'unpolished rice',
@@ -67,33 +67,33 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'fried string hoppers': 'steamed string hoppers',
   'white sugar (for tea)': 'jaggery',
   'refined salt': 'rock salt',
-  
+
   // Meat and protein
   'red meat': 'fish',
   'pork': 'chicken',
   'beef': 'fish',
   'processed meat': 'fresh fish',
   'canned fish': 'fresh fish',
-  
+
   // Vegetables (Sri Lankan)
   'fried vegetables': 'steamed vegetables',
   'canned vegetables': 'fresh vegetables',
   'fried brinjal': 'steamed brinjal',
   'fried okra': 'steamed okra',
   'fried potatoes': 'baked potatoes',
-  
+
   // More grains and cereals
   'white quinoa': 'brown quinoa',
   'refined semolina': 'whole wheat semolina',
   'white corn': 'yellow corn',
   'instant oats': 'rolled oats',
   'refined barley': 'whole barley',
-  
+
   // More Sri Lankan rice varieties
   'keeri samba': 'red rice',
   'sudu kekulu': 'red rice',
   'nadu': 'red rice',
-  
+
   // More beverages
   'artificial juice': 'fresh fruit juice',
   'concentrated juice': 'fresh fruit juice',
@@ -101,7 +101,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'packaged tea': 'loose leaf tea',
   'instant coffee': 'ground coffee',
   '3-in-1 coffee': 'black coffee',
-  
+
   // More snacks
   'fried cashews': 'roasted cashews',
   'salted peanuts': 'unsalted peanuts',
@@ -109,7 +109,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'murukku': 'baked murukku',
   'achcharu': 'fresh fruits',
   'seeni sambol': 'fresh coconut sambol',
-  
+
   // More condiments
   'artificial sweetener': 'stevia',
   'table salt': 'sea salt',
@@ -117,33 +117,33 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'white vinegar': 'apple cider vinegar',
   'soy sauce (regular)': 'low sodium soy sauce',
   'ketchup': 'homemade tomato sauce',
-  
+
   // More dairy alternatives
   'condensed milk': 'low-fat milk',
   'evaporated milk': 'low-fat milk',
   'sweetened yogurt': 'plain yogurt',
   'flavored yogurt': 'plain yogurt with fruits',
-  
+
   // More Sri Lankan sweets
   'kavum': 'fresh fruits',
   'kokis': 'baked kokis',
   'aluwa': 'dried fruits',
   'wattalappam': 'fresh fruits',
-  
+
   // More vegetables
   'fried bitter gourd': 'steamed bitter gourd',
   'fried ridge gourd': 'steamed ridge gourd',
   'fried ash plantain': 'steamed ash plantain',
   'fried breadfruit': 'steamed breadfruit',
   'fried jackfruit': 'fresh jackfruit',
-  
+
   // More protein sources
   'sausages': 'grilled chicken',
   'bacon': 'turkey bacon',
   'hot dogs': 'grilled fish',
   'luncheon meat': 'fresh fish',
   'canned meat': 'fresh meat',
-  
+
   // More cooking methods
   'deep fried food': 'baked food',
   'fried rice': 'steamed rice',
@@ -152,7 +152,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'fried fish': 'baked fish',
   'fried eggs': 'poached eggs',
   'fried tofu': 'baked tofu',
-  
+
   // More bread and bakery items
   'white buns': 'whole wheat buns',
   'croissants': 'whole grain bread',
@@ -163,7 +163,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'paratha': 'whole wheat roti',
   'puri': 'whole wheat roti',
   'fried bread': 'toasted whole wheat bread',
-  
+
   // More rice and grain alternatives
   'sticky rice': 'brown rice',
   'glutinous rice': 'brown rice',
@@ -174,7 +174,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'white bulgur': 'whole wheat bulgur',
   'refined cornmeal': 'whole grain cornmeal',
   'white polenta': 'whole grain polenta',
-  
+
   // More dairy and dairy alternatives
   'heavy cream': 'light cream',
   'whipping cream': 'low-fat cream',
@@ -188,7 +188,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'cheese spread': 'cottage cheese',
   'butter (for cooking)': 'olive oil',
   'clarified butter': 'coconut oil',
-  
+
   // More beverages
   'fruit punch': 'fresh fruit juice',
   'sports drinks': 'coconut water',
@@ -205,7 +205,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'beer': 'light beer or sparkling water',
   'wine': 'sparkling water',
   'cocktails': 'fresh fruit mocktails',
-  
+
   // More sweeteners
   'brown sugar': 'jaggery',
   'powdered sugar': 'honey',
@@ -217,7 +217,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'saccharin': 'stevia',
   'agave nectar': 'raw honey',
   'golden syrup': 'maple syrup',
-  
+
   // More snacks and treats
   'chips': 'baked vegetable chips',
   'nachos': 'baked tortilla chips',
@@ -242,7 +242,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'pudding': 'chia seed pudding',
   'gelatin': 'agar agar',
   'jello': 'fresh fruit jelly',
-  
+
   // More Sri Lankan snacks
   'fried vadai': 'baked vadai',
   'fried cutlet': 'baked cutlet',
@@ -259,7 +259,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'fried mixture': 'roasted nuts mixture',
   'fried peanuts': 'roasted peanuts',
   'fried almonds': 'roasted almonds',
-  
+
   // More condiments and sauces
   'ranch dressing': 'greek yogurt dressing',
   'caesar dressing': 'olive oil and lemon',
@@ -278,7 +278,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'tartar sauce': 'greek yogurt sauce',
   'cocktail sauce': 'homemade sauce',
   'remoulade': 'greek yogurt sauce',
-  
+
   // More oils and cooking fats
   'canola oil': 'olive oil',
   'corn oil': 'olive oil',
@@ -293,7 +293,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'trans fat': 'healthy fats',
   'shortening': 'coconut oil',
   'lard': 'coconut oil',
-  
+
   // More protein alternatives
   'ground beef': 'ground turkey',
   'beef steak': 'fish steak',
@@ -319,7 +319,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'tempeh (fried)': 'steamed tempeh',
   'seitan': 'tofu',
   'protein powder (artificial)': 'natural protein sources',
-  
+
   // More vegetables and preparation methods
   'canned beans': 'fresh beans',
   'canned corn': 'fresh corn',
@@ -341,7 +341,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'fried corn': 'boiled corn',
   'creamed vegetables': 'steamed vegetables',
   'buttered vegetables': 'steamed vegetables with herbs',
-  
+
   // More Sri Lankan vegetable preparations
   'fried gotukola': 'fresh gotukola salad',
   'fried kankun': 'steamed kankun',
@@ -359,7 +359,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'fried pumpkin curry': 'steamed pumpkin curry',
   'fried snake gourd curry': 'steamed snake gourd curry',
   'fried drumsticks curry': 'steamed drumsticks curry',
-  
+
   // More fruits and fruit products
   'canned fruits (in syrup)': 'fresh fruits',
   'fruit cocktail (canned)': 'fresh fruit salad',
@@ -375,7 +375,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'fruit nectar': 'fresh fruit juice',
   'smoothie (with added sugar)': 'fresh fruit smoothie',
   'frozen fruits (sweetened)': 'fresh fruits',
-  
+
   // More breakfast items
   'sugary cereals': 'whole grain cereals',
   'frosted flakes': 'plain cornflakes',
@@ -390,14 +390,14 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'danish pastries': 'whole grain muffins',
   'breakfast bars (sweetened)': 'homemade granola bars',
   'toaster pastries': 'whole grain toast with fruits',
-  
+
   // More Sri Lankan breakfast items
   'fried thosai': 'plain thosai',
   'fried iddli': 'steamed iddli',
   'fried pittu': 'steamed pittu',
   'fried appam': 'plain appam',
   'fried kiribath': 'plain kiribath',
-  
+
   // More desserts and sweets
   'cheesecake (full fat)': 'low-fat cheesecake',
   'ice cream (full fat)': 'frozen yogurt',
@@ -414,7 +414,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'bread pudding': 'whole grain bread pudding',
   'rice pudding (sweetened)': 'brown rice pudding',
   'semolina pudding': 'whole grain semolina pudding',
-  
+
   // More Sri Lankan desserts
   'wattalappam (high sugar)': 'low sugar wattalappam',
   'kiri pani (sweetened)': 'low sugar kiri pani',
@@ -426,7 +426,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'aluwa (high sugar)': 'low sugar aluwa',
   'thala guli (sweetened)': 'low sugar thala guli',
   'kevum (fried)': 'baked kevum',
-  
+
   // More processed foods
   'instant noodles': 'whole wheat noodles',
   'ramen noodles': 'whole wheat noodles',
@@ -447,7 +447,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'packaged curry': 'homemade curry',
   'instant curry': 'fresh curry',
   'ready-made meals': 'fresh cooked meals',
-  
+
   // More Sri Lankan processed items
   'instant hoppers mix': 'fresh hoppers',
   'instant string hoppers mix': 'fresh string hoppers',
@@ -457,7 +457,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'canned sambol': 'fresh sambol',
   'packaged lunumiris': 'fresh lunumiris',
   'instant coconut sambol': 'fresh coconut sambol',
-  
+
   // More beverages (alcoholic and non-alcoholic)
   'soda pop': 'sparkling water',
   'tonic water': 'sparkling water',
@@ -470,7 +470,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'energy shots': 'natural energy sources',
   'protein shakes (sweetened)': 'natural protein sources',
   'meal replacement shakes': 'balanced meals',
-  
+
   // More condiments and seasonings
   'seasoning salt': 'herbs and spices',
   'garlic salt': 'fresh garlic',
@@ -481,7 +481,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'artificial coloring': 'natural colors',
   'preservatives': 'fresh ingredients',
   'sodium-rich seasonings': 'herbs and spices',
-  
+
   // More spreads and dips
   'nutella': 'almond butter',
   'chocolate spread': 'dark chocolate spread',
@@ -496,7 +496,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'sour cream dip': 'greek yogurt dip',
   'ranch dip': 'greek yogurt dip',
   'onion dip': 'greek yogurt dip',
-  
+
   // More baking ingredients
   'white chocolate': 'dark chocolate',
   'milk chocolate': 'dark chocolate',
@@ -507,7 +507,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'frosting': 'whipped greek yogurt',
   'icing': 'natural fruit glaze',
   'fondant': 'natural fruit decorations',
-  
+
   // More grains and starches
   'white potatoes': 'sweet potatoes',
   'mashed potatoes (buttered)': 'mashed sweet potatoes',
@@ -516,21 +516,21 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'tater tots': 'baked sweet potato tots',
   'white breadcrumbs': 'whole wheat breadcrumbs',
   'panko (white)': 'whole wheat panko',
-  
+
   // More Sri Lankan grains
   'white samba rice': 'red samba rice',
   'white nadu': 'red nadu',
   'white kekulu': 'red kekulu',
   'white ma wee': 'red ma wee',
   'polished kuruluthuda': 'unpolished kuruluthuda',
-  
+
   // More legumes and beans
   'refried beans (canned)': 'fresh cooked beans',
   'baked beans (sweetened)': 'fresh cooked beans',
   'canned beans (with salt)': 'fresh cooked beans',
   'bean dip (processed)': 'homemade bean dip',
   'hummus (store-bought sweetened)': 'homemade hummus',
-  
+
   // More nuts and seeds
   'honey roasted nuts': 'raw nuts',
   'sugar coated nuts': 'raw nuts',
@@ -538,7 +538,7 @@ export const DEFAULT_HEALTHIER_ALTERNATIVES: Record<string, string> = {
   'candied nuts': 'raw nuts',
   'chocolate covered nuts': 'raw nuts',
   'trail mix (sweetened)': 'unsweetened trail mix',
-  
+
   // More meal replacements and supplements
   'protein bars (high sugar)': 'natural protein sources',
   'meal replacement bars': 'balanced meals',
@@ -553,20 +553,20 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'tea': ['sugar', 'honey', 'milk', 'jaggery'],
   'coffee': ['sugar', 'milk', 'cream'],
   'coconut water': ['lime', 'salt'],
-  
+
   // Bread and baked goods
   'bread': ['butter', 'jam', 'peanut butter'],
   'roti': ['curry', 'dhal', 'sambol'],
   'hoppers': ['coconut sambol', 'curry'],
   'string hoppers': ['coconut sambol', 'curry', 'dhal'],
   'pittu': ['coconut sambol', 'curry'],
-  
+
   // Rice and grains
   'rice': ['vegetables', 'curry', 'dhal', 'sambol'],
   'samba rice': ['curry', 'dhal', 'coconut sambol'],
   'red rice': ['curry', 'dhal', 'vegetables'],
   'brown rice': ['curry', 'vegetables'],
-  
+
   // Protein
   'eggs': ['milk', 'cheese', 'onions', 'green chilies'],
   'chicken': ['vegetables', 'spices', 'curry powder', 'onions', 'garlic', 'ginger'],
@@ -576,7 +576,7 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'dhal': ['coconut milk', 'curry leaves', 'mustard seeds', 'onions'],
   'chickpeas': ['coconut milk', 'curry powder', 'onions'],
   'green gram': ['coconut milk', 'curry leaves'],
-  
+
   // Vegetables (Sri Lankan)
   'brinjal': ['curry powder', 'coconut milk', 'onions'],
   'okra': ['curry powder', 'coconut milk', 'tomatoes'],
@@ -589,7 +589,7 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'carrots': ['coconut', 'curry powder'],
   'potatoes': ['curry powder', 'onions', 'green chilies'],
   'tomatoes': ['onions', 'curry powder', 'coconut'],
-  
+
   // Spices and condiments
   'curry powder': ['turmeric', 'chili powder', 'cinnamon', 'cardamom'],
   'turmeric': ['curry powder', 'chili powder', 'cumin'],
@@ -601,22 +601,22 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'coconut sambol': ['lime', 'chili', 'onions', 'salt'],
   'pol sambol': ['lime', 'chili', 'onions', 'salt'],
   'lunumiris': ['lime', 'chili', 'onions'],
-  
+
   // Pasta and noodles
   'pasta': ['tomato sauce', 'cheese', 'garlic'],
   'noodles': ['vegetables', 'soy sauce', 'eggs'],
-  
+
   // Dairy
   'milk': ['sugar', 'tea', 'coffee'],
   'yogurt': ['honey', 'fruits'],
   'cheese': ['bread', 'butter'],
-  
+
   // Fruits
   'bananas': ['honey', 'yogurt'],
   'papaya': ['lime', 'honey'],
   'mango': ['chili powder', 'salt'],
   'pineapple': ['chili powder', 'salt'],
-  
+
   // Cooking essentials
   'onions': ['garlic', 'ginger', 'curry leaves'],
   'garlic': ['onions', 'ginger', 'curry leaves'],
@@ -626,11 +626,11 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'fenugreek': ['curry powder', 'dhal'],
   'pandan leaves': ['rice', 'coconut milk'],
   'lemongrass': ['coconut milk', 'curry'],
-  
+
   // Snacks
   'cashew nuts': ['raisins', 'dried fruits'],
   'peanuts': ['chili', 'salt'],
-  
+
   // Traditional Sri Lankan dishes
   'kottu roti': ['curry', 'vegetables', 'eggs', 'chicken'],
   'rice and curry': ['dhal', 'vegetables', 'sambol', 'papadam', 'curry'],
@@ -660,7 +660,7 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'thampala': ['coconut', 'lime', 'chili'],
   'kohila': ['coconut', 'lime', 'onions'],
   'nivithi': ['coconut', 'lime', 'chili'],
-  
+
   // More seafood
   'tuna': ['curry powder', 'coconut milk', 'lime'],
   'salmon': ['lemon', 'herbs', 'garlic'],
@@ -672,7 +672,7 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'lobster': ['curry powder', 'coconut milk', 'garlic'],
   'mussels': ['curry powder', 'coconut milk', 'lime'],
   'oysters': ['lime', 'chili', 'onions'],
-  
+
   // More legumes and pulses
   'black gram': ['coconut milk', 'curry leaves', 'onions'],
   'cowpeas': ['coconut milk', 'curry powder', 'onions'],
@@ -682,7 +682,7 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'black beans': ['coconut milk', 'curry powder', 'onions'],
   'kidney beans': ['coconut milk', 'curry powder', 'tomatoes'],
   'lima beans': ['coconut milk', 'curry powder', 'onions'],
-  
+
   // More fruits (Sri Lankan)
   'wood apple': ['honey', 'jaggery'],
   'beli': ['salt', 'chili'],
@@ -701,7 +701,7 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'jambu': ['chili powder', 'salt'],
   'ambarella': ['chili powder', 'salt'],
   'veralu': ['chili powder', 'salt'],
-  
+
   // More spices and seasonings
   'fennel seeds': ['curry powder', 'cumin'],
   'star anise': ['cinnamon', 'cardamom'],
@@ -715,7 +715,7 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'coconut vinegar': ['lime', 'vinegar'],
   'maldive fish': ['curry powder', 'chili'],
   'dried fish': ['curry powder', 'coconut'],
-  
+
   // More cooking ingredients
   'rice flour': ['coconut milk', 'jaggery'],
   'wheat flour': ['yeast', 'sugar'],
@@ -724,13 +724,13 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'manioc': ['coconut', 'curry powder'],
   'sweet potato': ['coconut', 'jaggery'],
   'cassava': ['coconut', 'curry powder'],
-  
+
   // Breakfast items
   'porridge': ['honey', 'fruits', 'nuts'],
   'oats': ['honey', 'fruits', 'milk'],
   'cornflakes': ['milk', 'honey', 'fruits'],
   'muesli': ['milk', 'honey', 'yogurt'],
-  
+
   // More traditional items
   'thosai': ['dhal', 'coconut sambol', 'curry'],
   'iddli': ['dhal', 'coconut sambol', 'curry'],
@@ -739,7 +739,7 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'cutlet': ['potatoes', 'curry powder', 'breadcrumbs'],
   'roll': ['flour', 'curry', 'vegetables'],
   'samosa': ['flour', 'curry', 'potatoes'],
-  
+
   // More beverages
   'ginger tea': ['honey', 'lime', 'jaggery'],
   'herbal tea': ['honey', 'lemon'],
@@ -747,7 +747,7 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'black tea': ['sugar', 'milk', 'jaggery'],
   'coconut toddy': ['lime', 'salt'],
   'king coconut': ['lime', 'salt'],
-  
+
   // More snacks
   'roasted gram': ['chili', 'salt'],
   'chickpeas roasted': ['chili', 'salt'],
@@ -758,7 +758,7 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'raisins': ['nuts', 'yogurt'],
   'dates': ['nuts', 'yogurt'],
   'prunes': ['nuts', 'yogurt'],
-  
+
   // More condiments and sauces
   'chili sauce': ['fresh chili', 'lime'],
   'tomato sauce': ['fresh tomatoes', 'onions'],
@@ -768,7 +768,7 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'worcestershire sauce': ['soy sauce', 'vinegar'],
   'barbecue sauce': ['tomato sauce', 'honey'],
   'hot sauce': ['fresh chili', 'vinegar'],
-  
+
   // More dairy products
   'buttermilk': ['salt', 'curry leaves'],
   'lassi': ['yogurt', 'honey'],
@@ -776,7 +776,7 @@ const DEFAULT_CATEGORY_ASSOCIATIONS: Record<string, string[]> = {
   'mozzarella': ['tomatoes', 'basil'],
   'cheddar': ['bread', 'butter'],
   'feta': ['olives', 'tomatoes'],
-  
+
   // More grains
   'quinoa': ['vegetables', 'herbs'],
   'barley': ['vegetables', 'curry'],
@@ -800,12 +800,12 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'butter': 30,
   'ghee': 180,
   'margarine': 90,
-  
+
   // Eggs
   'eggs': 14,
   'chicken eggs': 14,
   'duck eggs': 14,
-  
+
   // Bread and baked goods
   'bread': 5,
   'white bread': 5,
@@ -815,7 +815,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'string hoppers': 1,
   'pittu': 2,
   'appam': 1,
-  
+
   // Meat and seafood
   'meat': 3,
   'chicken': 3,
@@ -830,7 +830,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'squid': 2,
   'canned fish': 365,
   'processed meat': 7,
-  
+
   // Vegetables (general)
   'vegetables': 7,
   'fresh vegetables': 7,
@@ -855,7 +855,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'bell peppers': 7,
   'chili': 7,
   'green chilies': 5,
-  
+
   // Fruits
   'fruits': 5,
   'fresh fruits': 5,
@@ -868,7 +868,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'apples': 30,
   'grapes': 7,
   'avocado': 3,
-  
+
   // Rice and grains
   'rice': 365,
   'white rice': 365,
@@ -880,7 +880,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'chickpeas': 365,
   'green gram': 365,
   'lentils': 365,
-  
+
   // Spices and condiments
   'curry powder': 180,
   'turmeric': 365,
@@ -895,7 +895,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'sugar': 9999,
   'jaggery': 365,
   'honey': 9999,
-  
+
   // Coconut products
   'coconut': 7,
   'fresh coconut': 7,
@@ -905,7 +905,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'desiccated coconut': 180,
   'coconut oil': 365,
   'virgin coconut oil': 365,
-  
+
   // Sambol and condiments
   'coconut sambol': 2,
   'pol sambol': 2,
@@ -913,32 +913,32 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'fresh sambol': 2,
   'pickles': 180,
   'chutney': 30,
-  
+
   // Herbs and leaves
   'curry leaves': 5,
   'pandan leaves': 3,
   'lemongrass': 7,
   'mint': 5,
   'coriander leaves': 5,
-  
+
   // Pasta and noodles
   'pasta': 365,
   'noodles': 365,
   'instant noodles': 365,
-  
+
   // Canned and packaged
   'canned vegetables': 365,
   'canned fruits': 365,
   'packaged juice': 180,
   'tomato sauce': 365,
   'soy sauce': 365,
-  
+
   // Beverages
   'fresh fruit juice': 2,
   'coconut water': 2,
   'tea': 365,
   'coffee': 365,
-  
+
   // Snacks
   'potato chips': 90,
   'biscuits': 180,
@@ -946,7 +946,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'nuts': 180,
   'cashew nuts': 180,
   'peanuts': 180,
-  
+
   // Other
   'flour': 180,
   'white flour': 180,
@@ -963,7 +963,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'canola oil': 365,
   'olive oil': 365,
   'sesame oil': 365,
-  
+
   // More Sri Lankan vegetables
   'bitter gourd': 7,
   'ridge gourd': 5,
@@ -980,7 +980,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'thampala': 2,
   'kohila': 2,
   'nivithi': 2,
-  
+
   // More seafood
   'tuna': 2,
   'salmon': 2,
@@ -994,7 +994,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'oysters': 1,
   'scallops': 2,
   'clams': 2,
-  
+
   // More legumes
   'black gram': 365,
   'cowpeas': 365,
@@ -1006,7 +1006,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'lima beans': 365,
   'black eyed peas': 365,
   'mung beans': 365,
-  
+
   // More fruits
   'wood apple': 7,
   'beli': 5,
@@ -1041,7 +1041,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'figs': 3,
   'dates': 180,
   'prunes': 180,
-  
+
   // More spices
   'fennel seeds': 365,
   'star anise': 365,
@@ -1066,7 +1066,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'garam masala': 180,
   'rasam powder': 180,
   'sambar powder': 180,
-  
+
   // More condiments
   'tamarind paste': 180,
   'coconut vinegar': 365,
@@ -1085,7 +1085,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'apple cider vinegar': 9999,
   'balsamic vinegar': 9999,
   'rice vinegar': 9999,
-  
+
   // More cooking ingredients
   'tapioca': 30,
   'manioc': 7,
@@ -1094,7 +1094,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'yam': 30,
   'taro': 7,
   'arrowroot': 180,
-  
+
   // More grains and cereals
   'quinoa': 365,
   'barley': 365,
@@ -1108,7 +1108,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'steel cut oats': 365,
   'cornmeal': 180,
   'polenta': 180,
-  
+
   // More traditional Sri Lankan items
   'thosai': 1,
   'iddli': 1,
@@ -1125,7 +1125,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'kalu dodol': 30,
   'mun kewum': 7,
   'aasmi': 7,
-  
+
   // More beverages
   'ginger tea': 365,
   'herbal tea': 365,
@@ -1138,7 +1138,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'king coconut': 7,
   'thambili': 7,
   'smoothie': 1,
-  
+
   // More snacks
   'roasted gram': 180,
   'chickpeas roasted': 180,
@@ -1158,7 +1158,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'flax seeds': 365,
   'hemp seeds': 365,
   'poppy seeds': 365,
-  
+
   // More dairy and alternatives
   'buttermilk': 5,
   'lassi': 2,
@@ -1182,7 +1182,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'oat milk': 7,
   'coconut milk (carton)': 7,
   'rice milk': 7,
-  
+
   // More condiments and sauces
   'oyster sauce': 365,
   'fish sauce': 365,
@@ -1198,14 +1198,14 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'peanut butter': 180,
   'almond butter': 180,
   'cashew butter': 180,
-  
+
   // More breakfast items
   'porridge': 1,
   'cornflakes': 365,
   'muesli': 180,
   'granola': 180,
   'cereal': 365,
-  
+
   // More baking items
   'vanilla extract': 365,
   'almond extract': 365,
@@ -1217,7 +1217,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'dried apricots': 180,
   'dried dates': 180,
   'dried figs': 180,
-  
+
   // More Sri Lankan rice varieties
   'keeri samba': 365,
   'sudu kekulu': 365,
@@ -1225,7 +1225,7 @@ const DEFAULT_EXIRY_DAYS: Record<string, number> = {
   'ma wee': 365,
   'kuruluthuda': 365,
   'rathu kekulu': 180,
-  
+
   // More pickles and preserves
   'mango pickle': 180,
   'lime pickle': 180,
@@ -1257,7 +1257,7 @@ function safeLoadRules() {
 function getHealthierAlternativesMap(): Record<string, string> {
   // Start with default rules (includes all 550+ items)
   const map: Record<string, string> = { ...DEFAULT_HEALTHIER_ALTERNATIVES };
-  
+
   // Merge with user-customized rules from storage (if any)
   const rules = safeLoadRules();
   if (rules && rules.healthierAlternatives) {
@@ -1266,12 +1266,12 @@ function getHealthierAlternativesMap(): Record<string, string> {
       map[rule.unhealthyItem.toLowerCase()] = rule.healthyAlternative;
     });
   }
-  
+
   // Debug: Log total number of rules (only in development)
   if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
     console.log(`[Healthier Alternatives] Loaded ${Object.keys(map).length} rules`);
   }
-  
+
   return map;
 }
 
@@ -1287,7 +1287,7 @@ export function getAllDefaultHealthierAlternatives(): Array<{ unhealthyItem: str
 function getCategoryAssociationsMap(): Record<string, string[]> {
   // Start with default rules (includes all 150+ items)
   const map: Record<string, string[]> = { ...DEFAULT_CATEGORY_ASSOCIATIONS };
-  
+
   // Merge with user-customized rules from storage (if any)
   const rules = safeLoadRules();
   if (rules && rules.categoryAssociations) {
@@ -1303,7 +1303,7 @@ function getCategoryAssociationsMap(): Record<string, string[]> {
 function getDefaultExpiryDaysMap(): Record<string, number> {
   // Start with default rules (includes all 250+ items)
   const map: Record<string, number> = { ...DEFAULT_EXIRY_DAYS };
-  
+
   // Merge with user-customized rules from storage (if any)
   const rules = safeLoadRules();
   if (rules && rules.defaultExpiryRules) {
@@ -1334,26 +1334,27 @@ export function evaluateRePurchaseRules(
   purchaseHistory.forEach(item => {
     const purchaseDate = new Date(item.purchaseDate);
     const daysSincePurchase = Math.floor((now.getTime() - purchaseDate.getTime()) / (1000 * 60 * 60 * 24));
-    
+
     // Check if item is not in current list
     if (!currentItemNames.includes(item.itemName.toLowerCase())) {
-      // Rule: If purchased within last 7 days and expiry is around 7 days, suggest re-purchase
-      if (daysSincePurchase >= 5 && daysSincePurchase <= 7) {
+      // Rule: If purchased within last 3-21 days (relaxed from 5-14) and expiry is around 14 days, suggest re-purchase
+      if (daysSincePurchase >= 3 && daysSincePurchase <= 21) {
         const typicalExpiry = DEFAULT_EXIRY_DAYS[item.itemName.toLowerCase()] || item.expiryTimeInDays;
-        if (typicalExpiry <= 7) {
+        if (typicalExpiry <= 14) { // Relaxed from 10 to 14
           suggestions.push({
             item: item.itemName,
-            reason: `You bought ${item.itemName} ${daysSincePurchase} days ago, and it typically runs out within a week. Should I add it again?`,
+            reason: `You bought ${item.itemName} ${daysSincePurchase} days ago. Should I add it again?`,
             type: 're-purchase',
           });
         }
       }
-      
-      // Rule: If item was purchased frequently (more than 3 times in history), suggest it
+
+      // Rule: If item was purchased frequently (more than 2 times in history), suggest it
       const purchaseCount = purchaseHistory.filter(
         h => h.itemName.toLowerCase() === item.itemName.toLowerCase()
       ).length;
-      if (purchaseCount >= 3 && daysSincePurchase <= 14) {
+      // Relaxed: Check within last 60 days instead of 30
+      if (purchaseCount >= 2 && daysSincePurchase <= 60) {
         const existing = suggestions.find(s => s.item.toLowerCase() === item.itemName.toLowerCase());
         if (!existing) {
           suggestions.push({
@@ -1418,40 +1419,40 @@ export function evaluateHealthierAlternatives(
   // Check if any part of the item name matches a key
   currentItemNames.forEach(itemName => {
     // Skip if we already found an exact match
-    const alreadySuggested = suggestions.some(s => 
+    const alreadySuggested = suggestions.some(s =>
       s.reason.toLowerCase().includes(`replacing ${itemName}`)
     );
-    
+
     if (!alreadySuggested) {
       // Try to find partial matches - check each key
       Object.keys(HEALTHIER_ALTERNATIVES).forEach(key => {
         const keyLower = key.toLowerCase();
         const alternative = HEALTHIER_ALTERNATIVES[key];
-        
+
         // Skip if alternative is already in the list
         if (currentItemNames.includes(alternative.toLowerCase())) {
           return;
         }
-        
+
         // Check for various match patterns
         const exactKeyMatch = itemName === keyLower;
         const keyInItem = itemName.includes(keyLower);
         const itemInKey = keyLower.includes(itemName);
-        
+
         // Word-based matching
         const itemWords = itemName.split(/\s+/).filter(w => w.length > 2);
         const keyWords = keyLower.split(/\s+/).filter(w => w.length > 2);
-        const wordMatch = itemWords.some(iw => 
+        const wordMatch = itemWords.some(iw =>
           keyWords.some(kw => iw === kw || iw.includes(kw) || kw.includes(iw))
         );
-        
+
         // If we have a match and haven't already suggested this alternative
         if ((exactKeyMatch || keyInItem || itemInKey || wordMatch) && !alreadySuggested) {
-          const isDuplicate = suggestions.some(s => 
-            s.item.toLowerCase() === alternative.toLowerCase() || 
+          const isDuplicate = suggestions.some(s =>
+            s.item.toLowerCase() === alternative.toLowerCase() ||
             s.reason.toLowerCase().includes(`replacing ${itemName}`)
           );
-          
+
           if (!isDuplicate) {
             suggestions.push({
               item: alternative,
@@ -1468,16 +1469,52 @@ export function evaluateHealthierAlternatives(
 }
 
 export function evaluateExpiryReminders(
-  purchaseHistory: PurchaseHistoryItem[]
+  purchaseHistory: PurchaseHistoryItem[],
+  currentGroceryList: GroceryItem[] = []
 ): Array<{ message: string; severity: 'warning' | 'critical' }> {
   const reminders: Array<{ message: string; severity: 'warning' | 'critical' }> = [];
   const now = new Date();
   const DEFAULT_EXIRY_DAYS = getDefaultExpiryDaysMap();
 
+  // 1. Check items currently in the grocery list (they take priority)
+  currentGroceryList.forEach(item => {
+    if (item.expiryDate) {
+      const expiryDate = new Date(item.expiryDate);
+      const daysUntilExpiry = Math.floor((expiryDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+
+      if (daysUntilExpiry <= 0) {
+        reminders.push({
+          message: `${item.name} in your list has expired.`,
+          severity: 'critical',
+        });
+      } else if (daysUntilExpiry <= 3) {
+        reminders.push({
+          message: `${item.name} in your list will expire in ${daysUntilExpiry} day${daysUntilExpiry !== 1 ? 's' : ''}.`,
+          severity: 'warning',
+        });
+      }
+    }
+  });
+
+  // 2. Check purchase history for items NOT in the grocery list
+  const groceryListNames = new Set(currentGroceryList.map(i => i.name.toLowerCase()));
+
   purchaseHistory.forEach(item => {
+    // Skip if item is already in grocery list (handled above or user is aware)
+    if (groceryListNames.has(item.itemName.toLowerCase())) {
+      return;
+    }
+
     const purchaseDate = new Date(item.purchaseDate);
-    const expiryDays = item.expiryTimeInDays || DEFAULT_EXIRY_DAYS[item.itemName.toLowerCase()] || 7;
-    const expiryDate = new Date(purchaseDate.getTime() + expiryDays * 24 * 60 * 60 * 1000);
+    // Use specific expiry date if available, otherwise calculate from purchase date
+    let expiryDate: Date;
+    if (item.expiryDate) {
+      expiryDate = new Date(item.expiryDate);
+    } else {
+      const expiryDays = item.expiryTimeInDays || DEFAULT_EXIRY_DAYS[item.itemName.toLowerCase()] || 7;
+      expiryDate = new Date(purchaseDate.getTime() + expiryDays * 24 * 60 * 60 * 1000);
+    }
+
     const daysUntilExpiry = Math.floor((expiryDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
 
     if (daysUntilExpiry <= 0) {
@@ -1509,7 +1546,7 @@ export function getAllRuleBasedSuggestions(
     rePurchase: evaluateRePurchaseRules(purchaseHistory, currentGroceryList),
     category: evaluateCategoryRules(currentGroceryList),
     healthier: evaluateHealthierAlternatives(currentGroceryList),
-    expiry: evaluateExpiryReminders(purchaseHistory),
+    expiry: evaluateExpiryReminders(purchaseHistory, currentGroceryList),
   };
 }
 

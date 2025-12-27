@@ -34,7 +34,7 @@ export function GroceryListTable({ groceryList, onRemoveItem, onEditItem, isLoad
 
   if (!isLoaded) {
     return (
-      <Card className="glass-card border-0">
+      <Card className="border shadow-sm">
         <CardHeader>
           <CardTitle className="font-headline">My Grocery List</CardTitle>
         </CardHeader>
@@ -51,7 +51,10 @@ export function GroceryListTable({ groceryList, onRemoveItem, onEditItem, isLoad
 
   return (
     <>
-      <Card className="glass-card border-0 overflow-hidden">
+      <Card className="border shadow-sm overflow-hidden">
+        <CardHeader>
+          <CardTitle className="font-headline">My Grocery List</CardTitle>
+        </CardHeader>
         <CardContent className="p-0">
           {groceryList.length === 0 ? (
             <div className="text-center py-16 px-4">

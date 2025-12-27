@@ -1,35 +1,28 @@
 'use client';
 
-import { GroceryGrid } from '@/components/grocery/GroceryGrid';
-import { QuickAddBar } from '@/components/grocery/QuickAddBar';
+import { GroceryListTable } from '@/components/grocery/GroceryListTable';
 import { useGroceryData } from '@/hooks/use-grocery-data';
 
 export default function ListPage() {
-    const { groceryList, addItem, removeItem, editItem } = useGroceryData();
+  const { groceryList, removeItem, editItem, isLoaded } = useGroceryData();
 
-    return (
-        <div className="h-full flex flex-col relative">
-            <div className="flex-1 overflow-y-auto p-6 pb-32 no-scrollbar">
-                <div className="max-w-5xl mx-auto space-y-8">
-                    <div>
-                        <h1 className="text-3xl font-bold font-heading text-foreground mb-2">My Grocery List</h1>
-                        <p className="text-muted-foreground">Manage your shopping essentials.</p>
-                    </div>
+  return (
+    <div className="flex flex-col gap-6">
+      <div>
+        <h1 className="text-3xl font-bold font-heading text-gray-900 dark:text-white tracking-tight">
+          My Grocery List
+        </h1>
+        <p className="text-gray-600 dark:text-gray-400 mt-1.5">
+          View and manage your items in a detailed table view.
+        </p>
+      </div>
 
-                    <GroceryGrid
-                        items={groceryList}
-                        onRemove={removeItem}
-                        onEdit={editItem}
-                    />
-                </div>
-            </div>
-
-            {/* Floating Quick Add Bar */}
-            <div className="absolute bottom-6 left-0 right-0 flex justify-center z-40 px-4">
-                <div className="w-full max-w-2xl">
-                    <QuickAddBar onAdd={addItem} />
-                </div>
-            </div>
-        </div>
-    );
+      <GroceryListTable
+        groceryList={groceryList}
+        onRemoveItem={removeItem}
+        onEditItem={editItem}
+        isLoaded={isLoaded}
+      />
+    </div>
+  );
 }
